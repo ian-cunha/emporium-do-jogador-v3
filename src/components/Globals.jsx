@@ -51,8 +51,9 @@ align-items: center;
   left: 0;
   right: 0;
   top: 80px;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: black;
   }
 `
 
@@ -71,6 +72,10 @@ justify-content: center;
 align-items: flex-start;
 position: fixed;
 z-index: 5;
+@media (max-width: 768px) {
+  margin-top: 0;
+  height: 100vh;
+  }
 `
 
 export const ListProfile = styled.div`
