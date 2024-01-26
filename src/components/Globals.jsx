@@ -75,6 +75,10 @@ z-index: 5;
 @media (max-width: 768px) {
   margin-top: 0;
   height: 100vh;
+  justify-content: normal;
+  align-items: normal;
+  overflow-y: scroll;
+  overflow-x: hidden;
   }
 `
 
