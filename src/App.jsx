@@ -4,7 +4,6 @@ import { LoginRegister } from "./pages/LoginRegister"
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/Firebase"
-import { Truques } from "./pages/subpages/magias/truques";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,7 +31,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route path="/truques" element={<Truques />} />
         <Route path="/login" element={<LoginRegister user={user} />} />
       </Routes>
     </BrowserRouter>
