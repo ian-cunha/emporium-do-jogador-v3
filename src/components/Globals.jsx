@@ -238,13 +238,14 @@ overflow-x: hidden;
 
 export const FlexRefs = styled.div`
 display: flex;
-flex-direction: row;
-align-items: center;
+flex-direction: column;
+align-items: flex-start;
 justify-content: flex-start;
 background: white;
 color: black;
 border-radius: 3px;
 @media (max-width: 768px) {
   flex-direction: column;
+  align-items: center;
 }
 `

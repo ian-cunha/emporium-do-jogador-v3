@@ -46,6 +46,10 @@ export const QuickRef = () => {
               {arr[1].ref8 != null && <ItemQuick>{arr[1].ref8}</ItemQuick>}
               {arr[1].ref9 != null && <ItemQuick>{arr[1].ref9}</ItemQuick>}
               {arr[1].ref10 != null && <ItemQuick>{arr[1].ref10}</ItemQuick>}
+              {arr[1].ref11 != null && <ItemQuick>{arr[1].ref11}</ItemQuick>}
+              {arr[1].ref12 != null && <ItemQuick>{arr[1].ref12}</ItemQuick>}
+              {arr[1].ref13 != null && <ItemQuick>{arr[1].ref13}</ItemQuick>}
+              {arr[1].ref14 != null && <ItemQuick>{arr[1].ref14}</ItemQuick>}
             </FlexRefs>
           </>
         })}
