@@ -210,6 +210,7 @@ margin: 15px;
 export const ItemQuick = styled.p`
 display: flex;
 margin: 15px;
+font-weight: bold;
 `
 
 export const RefTitle = styled.h2`
@@ -224,9 +225,23 @@ width: 95vw;
 height: auto;
 @media (max-width: 768px) {
 margin-top: 80px;
+padding-bottom: 80px;
 padding-top: 30px;
 height: 100%;
 overflow-y: scroll;
 overflow-x: hidden;
+}
+`
+
+export const FlexRefs = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: flex-start;
+background: white;
+color: black;
+border-radius: 3px;
+@media (max-width: 768px) {
+  flex-direction: column;
 }
 `

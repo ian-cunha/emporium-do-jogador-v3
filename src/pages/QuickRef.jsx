@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../config/Firebase"
 import { Bar } from '../components/Bar'
-import { View, ItemName, ItemQuick, BlockRefs, RefTitle } from '../components/Globals'
+import { FlexRefs, View, ItemName, ItemQuick, BlockRefs, RefTitle } from '../components/Globals'
 
 export const QuickRef = () => {
 
@@ -35,7 +35,18 @@ export const QuickRef = () => {
         {Object.entries(dataBase).map((arr) => {
           return <>
             <ItemName>{arr[1].name}</ItemName>
-            <ItemQuick>{arr[1].refs.join(" | ")}</ItemQuick>
+            <FlexRefs>
+              {arr[1].ref1 != null && <ItemQuick>{arr[1].ref1}</ItemQuick>}
+              {arr[1].ref2 != null && <ItemQuick>{arr[1].ref2}</ItemQuick>}
+              {arr[1].ref3 != null && <ItemQuick>{arr[1].ref3}</ItemQuick>}
+              {arr[1].ref4 != null && <ItemQuick>{arr[1].ref4}</ItemQuick>}
+              {arr[1].ref5 != null && <ItemQuick>{arr[1].ref5}</ItemQuick>}
+              {arr[1].ref6 != null && <ItemQuick>{arr[1].ref6}</ItemQuick>}
+              {arr[1].ref7 != null && <ItemQuick>{arr[1].ref7}</ItemQuick>}
+              {arr[1].ref8 != null && <ItemQuick>{arr[1].ref8}</ItemQuick>}
+              {arr[1].ref9 != null && <ItemQuick>{arr[1].ref9}</ItemQuick>}
+              {arr[1].ref10 != null && <ItemQuick>{arr[1].ref10}</ItemQuick>}
+            </FlexRefs>
           </>
         })}
       </BlockRefs>
