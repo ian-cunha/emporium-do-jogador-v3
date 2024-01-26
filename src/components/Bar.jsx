@@ -1,4 +1,4 @@
-import { ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit } from "./Globals"
+import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit } from "./Globals"
 
 export const Bar = () => {
 
@@ -38,18 +38,27 @@ export const Bar = () => {
     }
   }
 
+  function dropProfile() {
+    var dropUser = document.getElementById('dropdownProfile')
+    if (dropUser.style.display === 'flex') {
+      dropUser.style.display = 'none'
+    } else {
+      dropUser.style.display = 'flex'
+    }
+  }
+
   return (
     <>
       <NavBar>
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
-        <h1>Emporium do Jogador</h1>
+        <h1>EDJ</h1>
         <ListBar id="nav">
           <DropBox onClick={dropRaces}>Raças <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropClasses}>Classes <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropSpells}>Mágias <i className="bi bi-caret-down-fill"></i></DropBox>
           <BtnBar>Referência Rápida</BtnBar>
         </ListBar>
-        <BtnProfile className="bi bi-person" />
+        <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>
 
       <ListDrop id='dropdownRaces'>
@@ -83,6 +92,11 @@ export const Bar = () => {
         <Exit onClick={dropSpells} className="bi bi-x-square-fill" />
         <BtnBar>Truques</BtnBar>
       </ListDrop>
+
+      <ListProfile id='dropdownProfile'>
+        <BtnBar>Iniciar sessão</BtnBar>
+        <BtnBar>Ajuda</BtnBar>
+      </ListProfile>
     </>
   )
 }

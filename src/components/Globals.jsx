@@ -42,6 +42,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 @media (max-width: 768px) {
+  animation: slideInDown;
+  animation-duration: 1s;
   display: none;
   flex-direction: column;
   position: absolute;
@@ -63,12 +65,33 @@ margin-top: 80px;
 background-color: #121212;
 top: 0;
 width: 100vw;
-height: 95vh;
+height: 91vh;
 display: none;
 justify-content: center;
 align-items: flex-start;
 position: fixed;
 z-index: 5;
+`
+
+export const ListProfile = styled.div`
+animation: slideInDown;
+animation-duration: 1s;
+flex-direction: column;
+border-radius: 5px;
+margin-top: 80px;
+padding: 20px;
+background-color: #121212;
+top: 0;
+right:0;
+margin-right: 55px;
+display: none;
+justify-content: center;
+align-items: stretch;
+position: fixed;
+z-index: 5;
+@media (max-width: 768px) {
+  margin-right: 0;
+}
 `
 
 export const BtnBar = styled.button`
@@ -153,4 +176,20 @@ margin: 0 5px;
 &:hover {
   color: red;
 }
+`
+
+export const Title = styled.h1`
+margin: 10px 20px;
+text-align: center;
+font-size: 1.8em;
+`
+
+export const SubTitle = styled.p`
+margin: 10px 20px;
+text-align: center;
+`
+
+export const BoxHome = styled.div`
+margin: 24px;
+display: flex;
 `
