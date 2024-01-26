@@ -63,7 +63,7 @@ animation-duration: 1s;
 flex-direction: column;
 padding: 24px;
 margin-top: 80px;
-background-color: #121212;
+background-color: #121212A6;
 top: 0;
 width: 100vw;
 height: 91vh;
@@ -79,6 +79,7 @@ z-index: 5;
   align-items: normal;
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color: #121212;
   }
 `
 
@@ -246,6 +247,5 @@ color: black;
 border-radius: 3px;
 @media (max-width: 768px) {
   flex-direction: column;
-  align-items: center;
 }
 `

@@ -97,7 +97,7 @@ export const Bar = () => {
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>
-        <BtnBar>Iniciar sessão</BtnBar>
+        <BtnBar onClick={() => navigate('/login')}>Iniciar sessão</BtnBar>
         <BtnBar>Ajuda</BtnBar>
       </ListProfile>
     </>
