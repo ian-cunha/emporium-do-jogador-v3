@@ -221,8 +221,11 @@ margin-bottom: 12px;
 export const BlockRefs = styled.div`
 display: flex;
 flex-direction: column;
-width: 95vw;
+margin-top: 100px;
+width: 100vw;
 height: auto;
+overflow-x: hidden;
+padding: 15px;
 @media (max-width: 768px) {
 margin-top: 80px;
 padding-bottom: 80px;
