@@ -1,6 +1,9 @@
 import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit } from "./Globals"
+import { useNavigate } from "react-router-dom";
 
 export const Bar = () => {
+
+  const navigate = useNavigate();
 
   function dotBar() {
     var barBtn = document.getElementById('nav')
@@ -51,12 +54,12 @@ export const Bar = () => {
     <>
       <NavBar>
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
-        <h1>EDJ</h1>
+        <h1 onClick={() => navigate('/')}>EDJ</h1>
         <ListBar id="nav">
           <DropBox onClick={dropRaces}>Raças <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropClasses}>Classes <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropSpells}>Mágias <i className="bi bi-caret-down-fill"></i></DropBox>
-          <BtnBar>Referência Rápida</BtnBar>
+          <BtnBar onClick={() => navigate('/referencias')}>Referência Rápida</BtnBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>

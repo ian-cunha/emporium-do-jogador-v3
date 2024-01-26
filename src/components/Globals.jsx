@@ -202,3 +202,31 @@ export const BoxHome = styled.div`
 margin: 24px;
 display: flex;
 `
+
+export const ItemName = styled.h2`
+margin: 15px;
+`
+
+export const ItemQuick = styled.p`
+display: flex;
+margin: 15px;
+`
+
+export const RefTitle = styled.h2`
+text-align: center;
+margin-bottom: 12px;
+`
+
+export const BlockRefs = styled.div`
+display: flex;
+flex-direction: column;
+width: 95vw;
+height: auto;
+@media (max-width: 768px) {
+margin-top: 80px;
+padding-top: 30px;
+height: 100%;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+`

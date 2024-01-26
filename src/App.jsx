@@ -4,6 +4,7 @@ import { LoginRegister } from "./pages/LoginRegister"
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/Firebase"
+import { QuickRef } from "./pages/QuickRef";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index path="/" element={<Home />} />
+        <Route path="/referencias" element={<QuickRef />} />
         <Route path="/login" element={<LoginRegister user={user} />} />
       </Routes>
     </BrowserRouter>
