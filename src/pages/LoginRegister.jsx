@@ -1,30 +1,102 @@
-import { BtnBar, ViewAcess, FormBase, BlockAcess, InputEvent, ChangeLegend, Legend } from '../components/Globals'
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
+import { useState } from 'react';
+import { BtnBar, ViewAcess, TitleAcess, SubTitleAcess, FormBase, BlockAcess, InputEvent, ChangeLegend, Legend } from '../components/Globals'
+import { Navigate } from 'react-router-dom'
+import { auth } from "../config/Firebase"
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth"
 
-export const LoginRegister = () => {
-  const navigate = useNavigate();
+export const LoginRegister = ({ user }) => {
+
+  const [isSignUpActive, setIsSignUpActive] = useState(false)
+  const handleMethodChange = () => {
+    setIsSignUpActive(!isSignUpActive)
+  }
+
+  const [message, setMessage] = useState(true);
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const handleEmailChange = (event) => setEmail(event.target.value)
+  const handlePasswordChange = (event) => setPassword(event.target.value)
+  const handleConfirmPasswordChange = (event) => setConfirmPassword(event.target.value)
+
+  const handleSignUp = () => {
+    if (!email || !password || password === confirmPassword) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user)
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage)
+          setMessage(
+            <div>Erro</div>
+          )
+          setTimeout(function () {
+            setMessage(false)
+          }, 2000)
+        });
+    } else {
+      setMessage(
+        <div>Erro</div>
+      )
+      setTimeout(function () {
+        setMessage(false)
+      }, 2000)
+    }
+  }
+
+  const handleSignIn = () => {
+    if (!email || !password) return
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        setMessage(
+          <div>Erro</div>
+        )
+        setTimeout(function () {
+          setMessage(false)
+        }, 2000)
+      });
+  }
+
+  if (user) {
+    return <Navigate to='/plataforma'></Navigate>
+  }
 
   return (
     <ViewAcess>
+      {message}
       <BlockAcess>
-        <BtnBar onClick={() => navigate('/')}>Voltar</BtnBar>
-        <h1>EDJ</h1>
-        <h2>Bem-vindo de volta!</h2>
-        <h2>Bem-vindo a nossa plataforma!</h2>
-        <p>Aqui você tem.......</p>
+        {!isSignUpActive && <TitleAcess>Bem-vindo de volta, jogador!</TitleAcess>}
+        {isSignUpActive && <TitleAcess>Bem-vindo a nossa plataforma!</TitleAcess>}
+        <SubTitleAcess>Versão 0.0.1</SubTitleAcess>
       </BlockAcess>
       <BlockAcess>
         <FormBase>
-          <Legend>Faça seu cadastro</Legend>
-          <Legend>Fazer login</Legend>
-          <InputEvent type='text' placeholder='Nome de  Usuário' />
-          <InputEvent type='email' placeholder='E-mail' />
-          <InputEvent type='password' placeholder='Senha' />
-          <InputEvent type='password' placeholder='Repetir senha' />
-          <BtnBar>Entrar</BtnBar>
-          <BtnBar>Cadastre-se</BtnBar>
-          <ChangeLegend>Já possui uma conta? <b>Faça login</b></ChangeLegend>
-          <ChangeLegend>Não possui uma conta? <b>Registre-se agora!</b></ChangeLegend>
+          {isSignUpActive && <Legend>Faça seu cadastro</Legend>}
+          {!isSignUpActive && <Legend>Fazer login</Legend>}
+          <InputEvent type='email' placeholder='E-mail' onChange={handleEmailChange} />
+          <InputEvent type='password' placeholder='Senha' onChange={handlePasswordChange} />
+          {isSignUpActive && <InputEvent type='password' placeholder='Repetir senha' onChange={handleConfirmPasswordChange} />}
+          {!isSignUpActive && <BtnBar type="submit" onClick={handleSignIn}>Entrar</BtnBar>}
+          {isSignUpActive && <BtnBar type="submit" onClick={handleSignUp}>Cadastre-se</BtnBar>}
+          {isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Já possui uma conta? <b>Faça login</b></ChangeLegend>}
+          {!isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Não possui uma conta? <b>Registre-se agora!</b></ChangeLegend>}
         </FormBase>
       </BlockAcess>
     </ViewAcess>

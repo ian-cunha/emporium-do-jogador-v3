@@ -4,7 +4,9 @@ import { LoginRegister } from "./pages/LoginRegister"
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/Firebase"
+import { ProtectedRoute } from "./config/Protector"
 import { QuickRef } from "./pages/QuickRef";
+import { Dashboard } from "./pages/Dashboard"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -34,6 +36,11 @@ function App() {
         <Route index path="/" element={<Home />} />
         <Route path="/referencias" element={<QuickRef />} />
         <Route path="/login" element={<LoginRegister user={user} />} />
+        <Route path="/plataforma" element={
+          <ProtectedRoute user={user}>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   )

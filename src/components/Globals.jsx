@@ -263,6 +263,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 width: 100vw;
+overflow-x: hidden;
 height: 100vh;
 @media (max-width: 768px) {
   flex-direction: column;
@@ -271,15 +272,21 @@ height: 100vh;
 `
 
 export const FormBase = styled.form`
+animation: slideInRight;
+animation-duration: 1s;
 display: flex;
 flex-direction: column;
 background: #121212;
-border-radius: 15px;
-border-color: white;
-border-style: solid;
-padding: 24px;
+width: 50vw;
+height: 100vh;
+justify-content: center;
+padding: 20%;
 @media (max-width: 768px) {
+  animation: slideInUp;
+  animation-duration: 1s;
   flex-direction: column;
+  width: 100vw;
+  padding: 24px;
 }
 `
 
@@ -312,8 +319,26 @@ export const Legend = styled.legend`
 color: white;
 text-align: center;
 font-weight: bold;
+font-size: 1.5em;
 margin-top: 10px;
 margin-bottom: 10px;
+@media (max-width: 768px) {
+}
+`
+
+export const TitleAcess = styled.h2`
+font-size: 3em;
+text-align: center;
+margin: 15px;
+@media (max-width: 768px) {
+}
+`
+
+export const SubTitleAcess = styled.h3`
+font-size: 1em;
+text-align: center;
+font-weight: lighter;
+margin: 15px;
 @media (max-width: 768px) {
 }
 `
