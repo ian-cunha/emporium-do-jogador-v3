@@ -249,3 +249,71 @@ border-radius: 3px;
   flex-direction: column;
 }
 `
+export const ViewAcess = styled.div`
+display: flex;
+flex-direction: row;
+@media (max-width: 768px) {
+  flex-direction: column;
+}
+`
+
+export const BlockAcess = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100vw;
+height: 100vh;
+@media (max-width: 768px) {
+  flex-direction: column;
+  height: 50vh;
+}
+`
+
+export const FormBase = styled.form`
+display: flex;
+flex-direction: column;
+background: #121212;
+border-radius: 15px;
+border-color: white;
+border-style: solid;
+padding: 24px;
+@media (max-width: 768px) {
+  flex-direction: column;
+}
+`
+
+export const InputEvent = styled.input`
+border-radius: 5px;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 5px;
+padding-right: 5px;
+margin-top: 3px;
+margin-bottom: 3px;
+font-size: 1em;
+font-weight: bold;
+@media (max-width: 768px) {
+}
+`
+
+export const ChangeLegend = styled.button`
+background: transparent;
+color: white;
+border: none;
+margin-top: 10px;
+margin-bottom: 10px;
+cursor: pointer;
+@media (max-width: 768px) {
+}
+`
+
+export const Legend = styled.legend`
+color: white;
+text-align: center;
+font-weight: bold;
+margin-top: 10px;
+margin-bottom: 10px;
+@media (max-width: 768px) {
+}
+`

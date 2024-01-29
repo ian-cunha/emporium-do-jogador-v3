@@ -13,7 +13,7 @@ export const Home = () => {
       <SubTitle>Biblioteca de D&D dinâmica com conteúdo em PT-BR</SubTitle>
       <BoxHome>
         <Btn onClick={() => navigate('/referencias')}>Referência rápida</Btn>
-        <Btn>Changelog</Btn>
+        <Btn onClick={() => { window.location = 'https://github.com/ian-cunha/EmporiumDoJogador' }}>Changelog</Btn>
       </BoxHome>
     </View>
   )
