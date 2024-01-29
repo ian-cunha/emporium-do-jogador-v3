@@ -11,6 +11,7 @@ export const LoginRegister = () => {
         <h1>EDJ</h1>
         <h2>Bem-vindo de volta!</h2>
         <h2>Bem-vindo a nossa plataforma!</h2>
+        <p>Aqui você tem.......</p>
       </BlockAcess>
       <BlockAcess>
         <FormBase>
