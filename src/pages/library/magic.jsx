@@ -25,6 +25,7 @@ export const Magic = () => {
 
   useEffect(() => {
     getDataBase()
+    document.title = 'Mágias | ' + id;
   }, [])
 
   return (
