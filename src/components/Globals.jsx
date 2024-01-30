@@ -76,6 +76,7 @@ height: 100vh;
 `
 
 export const MagicView = styled.div`
+margin-top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -552,8 +553,8 @@ padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
-border-style: solid;
-border-color: white;
+border-style: dashed;
+border-color: green;
 background: black;
 color: white;
 font-weight: bold;
@@ -582,7 +583,6 @@ export const SpanFilter = styled.span`
     padding-bottom: 5px;
     border-radius: 5px;
     &:hover {
-      background: white;
       color: black;
       font-weight: bold;
     }
@@ -604,10 +604,11 @@ export const LiFilter = styled.li`
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-radius: 5px;
+    border-color: green;
+    border-bottom-style: solid;
     &:hover {
-      background: white;
-      color: black;
+      background: green;
+      color: white;
       font-weight: bold;
     }
 @media (max-width: 768px) {
