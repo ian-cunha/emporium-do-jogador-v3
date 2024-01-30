@@ -95,6 +95,15 @@ export const Bar = () => {
       <ListDrop id='dropdownSpells'>
         <Exit onClick={dropSpells} className="bi bi-x-square-fill" />
         <BtnBar onClick={() => navigate('/magias/truques')}>Truques</BtnBar>
+        <BtnBar>Nível 1</BtnBar>
+        <BtnBar>Nível 2</BtnBar>
+        <BtnBar>Nível 3</BtnBar>
+        <BtnBar>Nível 4</BtnBar>
+        <BtnBar>Nível 5</BtnBar>
+        <BtnBar>Nível 6</BtnBar>
+        <BtnBar>Nível 7</BtnBar>
+        <BtnBar>Nível 8</BtnBar>
+        <BtnBar>Nível 9</BtnBar>
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>
