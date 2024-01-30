@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const Loading = styled.div`
+width: 100vw;
+height: 100vh;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+@media (max-width: 768px) {
+  }
+`
+
 export const View = styled.div`
 display: flex;
 flex-direction: column;

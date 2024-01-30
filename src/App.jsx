@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./config/Protector"
 import { QuickRef } from "./pages/QuickRef";
 import { Dashboard } from "./backend/pages/Dashboard"
 import { Magic } from "./pages/library/magic";
+import { Loading } from "./components/Globals"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,7 +29,10 @@ function App() {
   }, []);
 
   if (isFetching) {
-    return <p>Carregando...</p>;
+    return <Loading>
+      <span className="loader" />
+      <h3>Carregando...</h3>
+    </Loading>;
   }
 
   return (
