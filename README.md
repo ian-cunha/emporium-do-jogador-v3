@@ -1,4 +1,4 @@
-![Logo do projeto]()
+![Logo do projeto](https://github.com/ian-cunha/EmporiumDoJogador/blob/main/src/assets/logo.svg)
 
 # Emporium do Jogador
 ...
@@ -6,7 +6,7 @@
 ## 🔥 Introdução
 ...
 
-[Acessar site]()
+[Acessar site](https://emporiumdojogador.vercel.app/)
 
 ## 📦 Tecnologias usadas:
 
