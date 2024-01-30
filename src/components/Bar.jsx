@@ -158,7 +158,7 @@ export const Bar = () => {
 
       <ListProfile id='dropdownProfile'>
         <ButtonBar className="bi bi-box-arrow-in-right" onClick={() => navigate('/login')}> Iniciar sessão</ButtonBar>
-        <ButtonBar className="bi bi-info-circle" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Comunidade</ButtonBar>
+        <ButtonBar className="bi bi-people" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Comunidade</ButtonBar>
       </ListProfile>
     </>
   )

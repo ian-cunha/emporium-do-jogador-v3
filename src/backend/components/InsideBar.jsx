@@ -49,7 +49,7 @@ export const InsideBar = () => {
 
       <ListProfile id='dropdownProfile'>
         <ButtonBar className="bi bi-box-arrow-left" onClick={handleSignOut}> Fechar sessão</ButtonBar>
-        <ButtonBar className="bi bi-info-circle" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Comunidade</ButtonBar>
+        <ButtonBar className="bi bi-people" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Comunidade</ButtonBar>
       </ListProfile>
     </>
   )
