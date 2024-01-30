@@ -302,7 +302,7 @@ export const ViewAcess = styled.div`
 display: flex;
 flex-direction: row;
 background-position: 50px;
-background-image: url('../assets/image1.svg');
+background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/f95457bd4dc1958c7c62d41afedd894232c9c0f4/src/assets/image1.svg);
 background-position: left;
 background-repeat: no-repeat;
 background-size: cover;
@@ -384,7 +384,6 @@ export const TitleAcess = styled.h2`
 font-size: 3em;
 text-align: center;
 margin: 15px;
-color: #111111;
 @media (max-width: 768px) {
 }
 `
@@ -394,7 +393,6 @@ font-size: 1em;
 text-align: center;
 font-weight: 500;
 margin: 15px;
-color: #111111;
 @media (max-width: 768px) {
 }
 `
