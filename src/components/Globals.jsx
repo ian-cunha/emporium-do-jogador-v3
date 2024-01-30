@@ -24,7 +24,7 @@ flex-direction: column;
 padding: 24px;
 margin: 5px;
 width: 650px;
-height: 370px;
+height: 400px;
 border-radius: 5px;
 color: rgba(18,18,18, 0.8);
 background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/7dbff535447beb3d91ca6eee77696c8fc9f07a46/src/assets/paper.svg);

@@ -41,6 +41,9 @@ export const Magic = () => {
               <InfoBox><b>Alcance:</b> {arr[1].range}</InfoBox>
               <InfoBox><b>Componentes:</b> {arr[1].components}</InfoBox>
               <InfoBox><b>Duração:</b> {arr[1].duration}</InfoBox>
+              {arr[1].highlevel != null &&
+                <InfoBox><b>Em Níveis Superiores:</b> {arr[1].highlevel}</InfoBox>
+              }
               <InfoBox><b>Classes:</b> {arr[1].classes}</InfoBox>
             </Box>
           </>

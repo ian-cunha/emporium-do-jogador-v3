@@ -51,6 +51,56 @@ export const Bar = () => {
     }
   }
 
+  const truques = () => {
+    navigate('/magias/truques')
+    location.reload()
+  }
+
+  const nivel1 = () => {
+    navigate('/magias/nivel1')
+    location.reload()
+  }
+
+  const nivel2 = () => {
+    navigate('/magias/nivel2')
+    location.reload()
+  }
+
+  const nivel3 = () => {
+    navigate('/magias/nivel3')
+    location.reload()
+  }
+
+  const nivel4 = () => {
+    navigate('/magias/nivel4')
+    location.reload()
+  }
+
+  const nivel5 = () => {
+    navigate('/magias/nivel5')
+    location.reload()
+  }
+
+  const nivel6 = () => {
+    navigate('/magias/nivel6')
+    location.reload()
+  }
+
+  const nivel7 = () => {
+    navigate('/magias/nivel7')
+    location.reload()
+  }
+
+  const nivel8 = () => {
+    navigate('/magias/nivel8')
+    location.reload()
+  }
+
+  const nivel9 = () => {
+    navigate('/magias/nivel9')
+    location.reload()
+  }
+
   return (
     <>
       <NavBar>
@@ -94,16 +144,16 @@ export const Bar = () => {
 
       <ListDrop id='dropdownSpells'>
         <Exit onClick={dropSpells} className="bi bi-x-square-fill" />
-        <BtnBar onClick={() => navigate('/magias/truques')}>Truques</BtnBar>
-        <BtnBar>Nível 1</BtnBar>
-        <BtnBar>Nível 2</BtnBar>
-        <BtnBar>Nível 3</BtnBar>
-        <BtnBar>Nível 4</BtnBar>
-        <BtnBar>Nível 5</BtnBar>
-        <BtnBar>Nível 6</BtnBar>
-        <BtnBar>Nível 7</BtnBar>
-        <BtnBar>Nível 8</BtnBar>
-        <BtnBar>Nível 9</BtnBar>
+        <BtnBar onClick={truques}>Truques</BtnBar>
+        <BtnBar onClick={nivel1}>Nível 1</BtnBar>
+        <BtnBar onClick={nivel2}>Nível 2</BtnBar>
+        <BtnBar onClick={nivel3}>Nível 3</BtnBar>
+        <BtnBar onClick={nivel4}>Nível 4</BtnBar>
+        <BtnBar onClick={nivel5}>Nível 5</BtnBar>
+        <BtnBar onClick={nivel6}>Nível 6</BtnBar>
+        <BtnBar onClick={nivel7}>Nível 7</BtnBar>
+        <BtnBar onClick={nivel8}>Nível 8</BtnBar>
+        <BtnBar onClick={nivel9}>Nível 9</BtnBar>
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>
