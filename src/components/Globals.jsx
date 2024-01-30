@@ -9,6 +9,15 @@ width: 100vw;
 height: 100vh;
 `
 
+export const ViewPlatform = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100vw;
+height: 100vh;
+`
+
 export const ImageLogo = styled.img`
 width: 130px;
 cursor: pointer;
@@ -228,6 +237,17 @@ margin: 10px 20px;
 text-align: center;
 `
 
+export const BioTop = styled.p`
+margin: 10px 20px;
+width: 60vw;
+font-size: 1.2em;
+text-align: center;
+@media (max-width: 768px) {
+  width: auto;
+  margin: 10px 20px;
+}
+`
+
 export const BoxHome = styled.div`
 margin: 24px;
 display: flex;
@@ -281,6 +301,11 @@ border-radius: 3px;
 export const ViewAcess = styled.div`
 display: flex;
 flex-direction: row;
+background-position: 50px;
+background-image: url('../assets/image1.svg');
+background-position: left;
+background-repeat: no-repeat;
+background-size: cover;
 @media (max-width: 768px) {
   flex-direction: column;
 }
@@ -305,7 +330,7 @@ animation: slideInRight;
 animation-duration: 1s;
 display: flex;
 flex-direction: column;
-background: #121212;
+background: rgba(18, 18, 18, 0.8);
 width: 50vw;
 height: 100vh;
 justify-content: center;
@@ -359,6 +384,7 @@ export const TitleAcess = styled.h2`
 font-size: 3em;
 text-align: center;
 margin: 15px;
+color: #111111;
 @media (max-width: 768px) {
 }
 `
@@ -366,8 +392,9 @@ margin: 15px;
 export const SubTitleAcess = styled.h3`
 font-size: 1em;
 text-align: center;
-font-weight: lighter;
+font-weight: 500;
 margin: 15px;
+color: #111111;
 @media (max-width: 768px) {
 }
 `

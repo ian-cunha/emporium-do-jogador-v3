@@ -99,7 +99,7 @@ export const Bar = () => {
 
       <ListProfile id='dropdownProfile'>
         <BtnBar className="bi bi-box-arrow-in-right" onClick={() => navigate('/login')}> Iniciar sessão</BtnBar>
-        <BtnBar className="bi bi-info-circle"> Ajuda</BtnBar>
+        <BtnBar className="bi bi-info-circle" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Ajuda</BtnBar>
       </ListProfile>
     </>
   )
