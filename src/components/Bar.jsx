@@ -1,4 +1,4 @@
-import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit, ImageLogo } from "./Globals"
+import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit, ImageLogo, ButtonBar } from "./Globals"
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg"
 
@@ -110,7 +110,7 @@ export const Bar = () => {
           <DropBox onClick={dropRaces}>Raças <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropClasses}>Classes <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropSpells}>Mágias <i className="bi bi-caret-down-fill"></i></DropBox>
-          <BtnBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</BtnBar>
+          <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</ButtonBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>
@@ -157,8 +157,8 @@ export const Bar = () => {
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>
-        <BtnBar className="bi bi-box-arrow-in-right" onClick={() => navigate('/login')}> Iniciar sessão</BtnBar>
-        <BtnBar className="bi bi-info-circle" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Ajuda</BtnBar>
+        <ButtonBar className="bi bi-box-arrow-in-right" onClick={() => navigate('/login')}> Iniciar sessão</ButtonBar>
+        <ButtonBar className="bi bi-info-circle" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Ajuda</ButtonBar>
       </ListProfile>
     </>
   )

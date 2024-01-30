@@ -181,6 +181,29 @@ border-radius: 5px;
 color: white;
 font-weight: bold;
 transition: 0.5s;
+width: 300px;
+&:hover {
+  color: black;
+  border-color: transparent;
+  background-color: white;
+}
+@media (max-width: 768px) {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 5px 5px;
+}
+`
+
+export const ButtonBar = styled.button`
+padding: 10px 20px;
+margin: 5px 5px;
+cursor: pointer;
+border-color: white;
+background-color: #121212A6;
+border-radius: 5px;
+color: white;
+font-weight: bold;
+transition: 0.5s;
 &:hover {
   color: black;
   border-color: transparent;
