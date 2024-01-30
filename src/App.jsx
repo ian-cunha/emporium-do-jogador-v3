@@ -33,6 +33,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='*' element={<div>Falha</div>} />
         <Route index path="/" element={<Home />} />
         <Route path="/referencias" element={<QuickRef />} />
         <Route path="/login" element={<LoginRegister user={user} />} />

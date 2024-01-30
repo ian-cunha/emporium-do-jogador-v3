@@ -10,24 +10,18 @@ import {
 } from "firebase/auth"
 
 export const LoginRegister = ({ user }) => {
-
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [isSignUpActive, setIsSignUpActive] = useState(false)
   const handleMethodChange = () => {
     setIsSignUpActive(!isSignUpActive)
   }
-
   const [message, setMessage] = useState(true);
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-
-  const handleEmailChange = (event) => setEmail(event.target.value)
-  const handlePasswordChange = (event) => setPassword(event.target.value)
-  const handleConfirmPasswordChange = (event) => setConfirmPassword(event.target.value)
-
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
     if (!email || !password || password === confirmPassword) {
+      e.preventDefault()
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -54,8 +48,9 @@ export const LoginRegister = ({ user }) => {
     }
   }
 
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
     if (!email || !password) return
+    e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -74,6 +69,10 @@ export const LoginRegister = ({ user }) => {
       });
   }
 
+  const handleEmailChange = (event) => setEmail(event.target.value)
+  const handlePasswordChange = (event) => setPassword(event.target.value)
+  const handleConfirmPasswordChange = (event) => setConfirmPassword(event.target.value)
+
   if (user) {
     return <Navigate to='/plataforma'></Navigate>
   }
@@ -82,8 +81,8 @@ export const LoginRegister = ({ user }) => {
     <ViewAcess>
       {message}
       <BlockAcess>
-        {!isSignUpActive && <TitleAcess>Bem-vindo de volta, jogador!</TitleAcess>}
         {isSignUpActive && <TitleAcess>Bem-vindo a nossa plataforma!</TitleAcess>}
+        {!isSignUpActive && <TitleAcess>Bem-vindo de volta, jogador!</TitleAcess>}
         <SubTitleAcess>Versão 0.0.1</SubTitleAcess>
       </BlockAcess>
       <BlockAcess>
@@ -93,8 +92,10 @@ export const LoginRegister = ({ user }) => {
           <InputEvent type='email' placeholder='E-mail' onChange={handleEmailChange} />
           <InputEvent type='password' placeholder='Senha' onChange={handlePasswordChange} />
           {isSignUpActive && <InputEvent type='password' placeholder='Repetir senha' onChange={handleConfirmPasswordChange} />}
-          {!isSignUpActive && <BtnBar type="submit" onClick={handleSignIn}>Entrar</BtnBar>}
+
           {isSignUpActive && <BtnBar type="submit" onClick={handleSignUp}>Cadastre-se</BtnBar>}
+          {!isSignUpActive && <BtnBar type="submit" onClick={handleSignIn}>Entrar</BtnBar>}
+
           {isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Já possui uma conta? <b>Faça login</b></ChangeLegend>}
           {!isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Não possui uma conta? <b>Registre-se agora!</b></ChangeLegend>}
         </FormBase>
