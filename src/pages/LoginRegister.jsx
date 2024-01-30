@@ -83,7 +83,7 @@ export const LoginRegister = ({ user }) => {
       <BlockAcess>
         {isSignUpActive && <TitleAcess>Bem-vindo a nossa plataforma!</TitleAcess>}
         {!isSignUpActive && <TitleAcess>Bem-vindo de volta, jogador!</TitleAcess>}
-        <SubTitleAcess>Versão 0.0.1</SubTitleAcess>
+        <SubTitleAcess>Alpha - Versão 0.0.1</SubTitleAcess>
       </BlockAcess>
       <BlockAcess>
         <FormBase>
