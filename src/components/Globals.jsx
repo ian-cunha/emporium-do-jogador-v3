@@ -284,6 +284,7 @@ width: 60vw;
 font-size: 1.2em;
 text-align: center;
 @media (max-width: 768px) {
+  text-align: justify;
   width: auto;
   margin: 10px 20px;
 }
