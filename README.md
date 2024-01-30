@@ -6,7 +6,7 @@
 ## 🔥 Introdução
 ...
 
-[Acessar site]()
+[Acessar site](https://emporiumdojogador.vercel.app/)
 
 ## 📦 Tecnologias usadas:
 
