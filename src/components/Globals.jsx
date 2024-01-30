@@ -47,8 +47,9 @@ background-repeat: no-repeat;
 `
 
 export const FlexBox = styled.div`
-  padding-top: 90px;
-  padding-bottom: 40px;
+  margin-top: 80px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
