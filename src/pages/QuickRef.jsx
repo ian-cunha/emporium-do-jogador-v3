@@ -36,20 +36,20 @@ export const QuickRef = () => {
           return <>
             <ItemName>{arr[1].name}</ItemName>
             <FlexRefs>
-              {arr[1].ref1 != null && <ItemQuick className="bi bi-dot">{arr[1].ref1}</ItemQuick>}
-              {arr[1].ref2 != null && <ItemQuick className="bi bi-dot">{arr[1].ref2}</ItemQuick>}
-              {arr[1].ref3 != null && <ItemQuick className="bi bi-dot">{arr[1].ref3}</ItemQuick>}
-              {arr[1].ref4 != null && <ItemQuick className="bi bi-dot">{arr[1].ref4}</ItemQuick>}
-              {arr[1].ref5 != null && <ItemQuick className="bi bi-dot">{arr[1].ref5}</ItemQuick>}
-              {arr[1].ref6 != null && <ItemQuick className="bi bi-dot">{arr[1].ref6}</ItemQuick>}
-              {arr[1].ref7 != null && <ItemQuick className="bi bi-dot">{arr[1].ref7}</ItemQuick>}
-              {arr[1].ref8 != null && <ItemQuick className="bi bi-dot">{arr[1].ref8}</ItemQuick>}
-              {arr[1].ref9 != null && <ItemQuick className="bi bi-dot">{arr[1].ref9}</ItemQuick>}
-              {arr[1].ref10 != null && <ItemQuick className="bi bi-dot">{arr[1].ref10}</ItemQuick>}
-              {arr[1].ref11 != null && <ItemQuick className="bi bi-dot">{arr[1].ref11}</ItemQuick>}
-              {arr[1].ref12 != null && <ItemQuick className="bi bi-dot">{arr[1].ref12}</ItemQuick>}
-              {arr[1].ref13 != null && <ItemQuick className="bi bi-dot">{arr[1].ref13}</ItemQuick>}
-              {arr[1].ref14 != null && <ItemQuick className="bi bi-dot">{arr[1].ref14}</ItemQuick>}
+              {arr[1].ref1 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref1}</ItemQuick>}
+              {arr[1].ref2 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref2}</ItemQuick>}
+              {arr[1].ref3 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref3}</ItemQuick>}
+              {arr[1].ref4 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref4}</ItemQuick>}
+              {arr[1].ref5 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref5}</ItemQuick>}
+              {arr[1].ref6 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref6}</ItemQuick>}
+              {arr[1].ref7 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref7}</ItemQuick>}
+              {arr[1].ref8 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref8}</ItemQuick>}
+              {arr[1].ref9 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref9}</ItemQuick>}
+              {arr[1].ref10 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref10}</ItemQuick>}
+              {arr[1].ref11 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref11}</ItemQuick>}
+              {arr[1].ref12 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref12}</ItemQuick>}
+              {arr[1].ref13 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref13}</ItemQuick>}
+              {arr[1].ref14 != null && <ItemQuick className="bi bi-chevron-double-right">{arr[1].ref14}</ItemQuick>}
             </FlexRefs>
           </>
         })}

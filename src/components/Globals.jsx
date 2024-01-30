@@ -34,29 +34,73 @@ display: flex;
 flex-direction: column;
 padding: 24px;
 margin: 5px;
-width: 650px;
-height: 400px;
-border-radius: 5px;
-color: rgba(18,18,18, 0.8);
-background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/7dbff535447beb3d91ca6eee77696c8fc9f07a46/src/assets/paper.svg);
+width: 45vw;
+height: 100vh;
+border-radius: 10px;
+color: white;
+background: black;
+border-style: dashed;
+border-color: green;
 background-repeat: no-repeat;
+@media (max-width: 768px) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  }
+`
+
+export const BoxFilter = styled.div`
+display: flex;
+flex-direction: column;
+padding: 24px;
+margin: 5px;
+width: 100vw;
+height: 80vh;
+border-radius: 5px;
+color: white;
+@media (max-width: 768px) {
+  width: 100%;
+  height: 100vh;
+  margin-top: 90px;
+  }
+`
+
+export const BoxFilter2 = styled.div`
+margin: 0;
+width: 100vw;
+height: 100vh;
 @media (max-width: 768px) {
   width: 100%;
   height: auto;
   }
 `
 
-export const FlexBox = styled.div`
-  margin-top: 80px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+export const MagicView = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
+export const FlexBox = styled.div`
+  margin-top: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  @media (max-width: 768px) {
+    margin-top: 0;
+    padding-top: 160px;
+  }
 `
 
 export const ImageLogo = styled.img`
@@ -334,8 +378,8 @@ margin: 15px;
 export const ItemQuick = styled.p`
 display: flex;
 margin: 15px;
-color: rgba(18, 18, 18, 0.9);
-font-weight: bold;
+color: white;
+font-weight: 400;
 `
 
 export const RefTitle = styled.h2`
@@ -363,14 +407,17 @@ overflow-x: hidden;
 
 export const FlexRefs = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row;
+flex-flow: row wrap;
 align-items: flex-start;
 justify-content: flex-start;
-background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/7dbff535447beb3d91ca6eee77696c8fc9f07a46/src/assets/paper.svg);
+background: black;
 background-repeat: no-repeat;
 background-size: cover;
-color: black;
-border-radius: 3px;
+border-style: dashed;
+border-color: green;
+color: white;
+border-radius: 10px;
 @media (max-width: 768px) {
   flex-direction: column;
 }
@@ -495,5 +542,74 @@ font-weight: 500;
 margin-bottom: 2px;
 margin-top: 2px;
 @media (max-width: 768px) {
+}
+`
+
+export const InputFilter = styled.input`
+border-radius: 5px;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-style: solid;
+border-color: white;
+background: black;
+color: white;
+font-weight: bold;
+@media (max-width: 768px) {
+}
+`
+
+export const UlFilter = styled.ul`
+    display:flex;
+    justify-content:space-around;
+    width: 100%;
+@media (max-width: 768px) {
+}
+`
+
+export const SpanFilter = styled.span`
+    list-style-type: none;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 0.8em;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    &:hover {
+      background: white;
+      color: black;
+      font-weight: bold;
+    }
+@media (max-width: 768px) {
+  width: auto;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+`
+
+export const LiFilter = styled.li`
+    display:flex;
+    justify-content: center;
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    &:hover {
+      background: white;
+      color: black;
+      font-weight: bold;
+    }
+@media (max-width: 768px) {
+  width: auto;
 }
 `

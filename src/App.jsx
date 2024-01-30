@@ -40,7 +40,7 @@ function App() {
       <Routes>
         <Route path='*' element={<div>Oxi, acho que tu se perdesse visse!</div>} />
         <Route index path="/" element={<Home />} />
-        <Route index path="/magias/:id" element={<Magic />} />
+        <Route index path="/:id" element={<Magic />} />
         <Route path="/referencias" element={<QuickRef />} />
         <Route path="/login" element={<LoginRegister user={user} />} />
         <Route path="/plataforma" element={
