@@ -1,8 +1,8 @@
-import { ListProfile, ListBar, Menu, NavBar, BtnBar, BtnProfile, ImageLogo } from "./Globals"
+import { ListProfile, ListBar, Menu, NavBar, BtnBar, BtnProfile, ImageLogo } from "../../components/Globals"
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"
-import { auth } from "../config/Firebase"
-import logo from "../assets/logo.svg"
+import { auth } from "../../config/Firebase"
+import logo from "../../assets/logo.svg"
 
 export const InsideBar = () => {
 

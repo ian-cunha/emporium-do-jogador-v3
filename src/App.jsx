@@ -6,7 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/Firebase"
 import { ProtectedRoute } from "./config/Protector"
 import { QuickRef } from "./pages/QuickRef";
-import { Dashboard } from "./pages/Dashboard"
+import { Dashboard } from "./backend/pages/Dashboard"
 
 function App() {
   const [user, setUser] = useState(null);

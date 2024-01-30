@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import { useState } from 'react';
-import { BtnBar, ViewAcess, TitleAcess, SubTitleAcess, FormBase, BlockAcess, InputEvent, ChangeLegend, Legend } from '../components/Globals'
+import { BtnSubmit, ViewAcess, TitleAcess, SubTitleAcess, FormBase, BlockAcess, InputEvent, ChangeLegend, Legend } from '../components/Globals'
 import { Navigate } from 'react-router-dom'
 import { auth } from "../config/Firebase"
 import {
@@ -93,8 +93,8 @@ export const LoginRegister = ({ user }) => {
           <InputEvent type='password' placeholder='Senha' onChange={handlePasswordChange} />
           {isSignUpActive && <InputEvent type='password' placeholder='Repetir senha' onChange={handleConfirmPasswordChange} />}
 
-          {isSignUpActive && <BtnBar type="submit" onClick={handleSignUp}>Cadastre-se</BtnBar>}
-          {!isSignUpActive && <BtnBar type="submit" onClick={handleSignIn}>Entrar</BtnBar>}
+          {isSignUpActive && <BtnSubmit type="submit" onClick={handleSignUp}>Cadastre-se</BtnSubmit>}
+          {!isSignUpActive && <BtnSubmit type="submit" onClick={handleSignIn}>Entrar</BtnSubmit>}
 
           {isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Já possui uma conta? <b>Faça login</b></ChangeLegend>}
           {!isSignUpActive && <ChangeLegend onClick={handleMethodChange}>Não possui uma conta? <b>Registre-se agora!</b></ChangeLegend>}

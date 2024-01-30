@@ -71,7 +71,7 @@ animation-duration: 1s;
 flex-direction: column;
 padding: 24px;
 margin-top: 80px;
-background-color: #121212A6;
+background-color: #121212;
 top: 0;
 width: 100vw;
 height: 91vh;
@@ -129,6 +129,27 @@ transition: 0.5s;
 }
 @media (max-width: 768px) {
   width: 100%;
+  padding: 15px 20px;
+  margin: 5px 5px;
+}
+`
+
+export const BtnSubmit = styled.button`
+padding: 10px 20px;
+margin: 5px 5px;
+cursor: pointer;
+border-color: white;
+background-color: #121212A6;
+border-radius: 5px;
+color: white;
+font-weight: bold;
+transition: 0.5s;
+&:hover {
+  color: black;
+  border-color: transparent;
+  background-color: white;
+}
+@media (max-width: 768px) {
   padding: 15px 20px;
   margin: 5px 5px;
 }
