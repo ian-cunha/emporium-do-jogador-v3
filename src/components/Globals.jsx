@@ -9,6 +9,14 @@ width: 100vw;
 height: 100vh;
 `
 
+export const ImageLogo = styled.img`
+width: 130px;
+cursor: pointer;
+@media (max-width: 768px) {
+  width: 130px;
+  }
+`
+
 export const NavBar = styled.nav`
 top: 0;
 width: 100vw;

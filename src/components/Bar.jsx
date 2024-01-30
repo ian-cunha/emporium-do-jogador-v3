@@ -1,5 +1,6 @@
-import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit } from "./Globals"
+import { ListProfile, ListBar, Menu, NavBar, BtnBar, DropBox, BtnProfile, ListDrop, Exit, ImageLogo } from "./Globals"
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.svg"
 
 export const Bar = () => {
 
@@ -54,7 +55,7 @@ export const Bar = () => {
     <>
       <NavBar>
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
-        <h1 onClick={() => navigate('/')}>EDJ</h1>
+        <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
           <DropBox onClick={dropRaces}>Raças <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropClasses}>Classes <i className="bi bi-caret-down-fill"></i></DropBox>

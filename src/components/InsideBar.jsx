@@ -1,7 +1,8 @@
-import { ListProfile, ListBar, Menu, NavBar, BtnBar, BtnProfile } from "./Globals"
+import { ListProfile, ListBar, Menu, NavBar, BtnBar, BtnProfile, ImageLogo } from "./Globals"
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"
 import { auth } from "../config/Firebase"
+import logo from "../assets/logo.svg"
 
 export const InsideBar = () => {
 
@@ -35,7 +36,7 @@ export const InsideBar = () => {
     <>
       <NavBar>
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
-        <h1 onClick={() => navigate('/')}>EDJ</h1>
+        <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
           <BtnBar>Sua ficha</BtnBar>
           <BtnBar>Biblioteca</BtnBar>
