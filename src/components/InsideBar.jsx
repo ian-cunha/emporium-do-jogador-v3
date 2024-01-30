@@ -38,6 +38,7 @@ export const InsideBar = () => {
         <h1 onClick={() => navigate('/')}>EDJ</h1>
         <ListBar id="nav">
           <BtnBar>Sua ficha</BtnBar>
+          <BtnBar>Biblioteca</BtnBar>
           <BtnBar onClick={() => navigate('/referencias')}>Referência Rápida</BtnBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
