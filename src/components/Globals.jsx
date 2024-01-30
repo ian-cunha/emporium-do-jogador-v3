@@ -586,7 +586,7 @@ export const SpanFilter = styled.span`
       color: black;
       font-weight: bold;
     }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   width: 50px;
   margin-left: 3px;
   margin-right: 3px;
@@ -611,7 +611,7 @@ export const LiFilter = styled.li`
       color: white;
       font-weight: bold;
     }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   width: auto;
 }
 `
