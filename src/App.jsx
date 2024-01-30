@@ -34,7 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='*' element={<div>Oxi, acho que tu se visse!</div>} />
+        <Route path='*' element={<div>Oxi, acho que tu se perdesse visse!</div>} />
         <Route index path="/" element={<Home />} />
         <Route index path="/magias/:id" element={<Magic />} />
         <Route path="/referencias" element={<QuickRef />} />
