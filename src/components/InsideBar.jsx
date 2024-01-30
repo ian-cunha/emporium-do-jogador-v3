@@ -38,16 +38,16 @@ export const InsideBar = () => {
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
-          <BtnBar>Sua ficha</BtnBar>
-          <BtnBar>Biblioteca</BtnBar>
-          <BtnBar onClick={() => navigate('/referencias')}>Referência Rápida</BtnBar>
+          <BtnBar className="bi bi-file-earmark-post"> Sua ficha</BtnBar>
+          <BtnBar className="bi bi-collection"> Biblioteca</BtnBar>
+          <BtnBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</BtnBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>
 
       <ListProfile id='dropdownProfile'>
-        <BtnBar onClick={handleSignOut}>Fechar sessão</BtnBar>
-        <BtnBar>Ajuda</BtnBar>
+        <BtnBar className="bi bi-box-arrow-left" onClick={handleSignOut}> Fechar sessão</BtnBar>
+        <BtnBar className="bi bi-info-circle"> Ajuda</BtnBar>
       </ListProfile>
     </>
   )

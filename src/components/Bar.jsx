@@ -60,7 +60,7 @@ export const Bar = () => {
           <DropBox onClick={dropRaces}>Raças <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropClasses}>Classes <i className="bi bi-caret-down-fill"></i></DropBox>
           <DropBox onClick={dropSpells}>Mágias <i className="bi bi-caret-down-fill"></i></DropBox>
-          <BtnBar onClick={() => navigate('/referencias')}>Referência Rápida</BtnBar>
+          <BtnBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</BtnBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>
@@ -98,8 +98,8 @@ export const Bar = () => {
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>
-        <BtnBar onClick={() => navigate('/login')}>Iniciar sessão</BtnBar>
-        <BtnBar>Ajuda</BtnBar>
+        <BtnBar className="bi bi-box-arrow-in-right" onClick={() => navigate('/login')}> Iniciar sessão</BtnBar>
+        <BtnBar className="bi bi-info-circle"> Ajuda</BtnBar>
       </ListProfile>
     </>
   )
