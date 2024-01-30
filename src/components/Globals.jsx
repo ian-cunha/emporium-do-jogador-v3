@@ -66,6 +66,25 @@ overflow:auto;
   }
 `
 
+export const FilterFixed = styled.div`
+position: fixed;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 15px;
+width: 45%;
+margin-top: -30px;
+border-radius: 5px;
+color: white;
+overflow:auto;
+@media (max-width: 768px) {
+  width: 85%;
+  margin-top: 0;
+  margin: 5px;
+  }
+`
+
 export const BoxFilter2 = styled.div`
 margin: 0;
 width: 100vw;
@@ -559,7 +578,9 @@ border-color: green;
 background: black;
 color: white;
 font-weight: bold;
+width: 100%;
 @media (max-width: 768px) {
+  width: 100%;
 }
 `
 

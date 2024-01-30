@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Bar } from '../../components/Bar'
-import { SpanFilter, InputFilter, UlFilter, LiFilter, MagicView, BoxFilter, BoxFilter2, Box, View, FlexBox, TitleBox, SubBox, InfoBox } from '../../components/Globals'
+import { FilterFixed, SpanFilter, InputFilter, UlFilter, LiFilter, MagicView, BoxFilter, BoxFilter2, Box, View, FlexBox, TitleBox, SubBox, InfoBox } from '../../components/Globals'
 import { useParams } from "react-router-dom"
 
 import { useState, useEffect } from "react"
@@ -63,6 +63,7 @@ export const Magic = () => {
       <Bar />
       <MagicView>
         <BoxFilter>
+          <FilterFixed>
           <InputFilter placeholder='Filtro' />
           <UlFilter>
             <LiFilter>Nome</LiFilter>
@@ -73,6 +74,11 @@ export const Magic = () => {
             <LiFilter>Alcance</LiFilter>
             <LiFilter>Fonte</LiFilter>
           </UlFilter>
+          </FilterFixed>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           {Object.entries(dataBase).map((magic) => {
 
             let Title = magic[1].title
