@@ -67,6 +67,15 @@ cursor: pointer;
   }
 `
 
+export const BodyImage = styled.img`
+width: 400px;
+margin: 24px;
+cursor: pointer;
+@media (max-width: 768px) {
+  width: 300px;
+  }
+`
+
 export const NavBar = styled.nav`
 top: 0;
 width: 100vw;
