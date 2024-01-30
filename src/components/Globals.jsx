@@ -160,7 +160,7 @@ padding: 20px;
 background-color: #121212;
 top: 0;
 right:0;
-margin-right: 55px;
+margin-right: 5vw;
 display: none;
 justify-content: center;
 align-items: stretch;
