@@ -31,7 +31,7 @@ background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJoga
 background-repeat: no-repeat;
 @media (max-width: 768px) {
   width: 100%;
-  height: 450px;
+  height: auto;
   }
 `
 
