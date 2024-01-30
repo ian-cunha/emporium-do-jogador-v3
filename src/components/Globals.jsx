@@ -345,7 +345,7 @@ export const ViewAcess = styled.div`
 display: flex;
 flex-direction: row;
 background-position: 50px;
-background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/f95457bd4dc1958c7c62d41afedd894232c9c0f4/src/assets/image1.svg);
+background-image: linear-gradient(to right, rgba(18, 18, 18, .6), rgba(18, 18, 18, .6)),url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/f95457bd4dc1958c7c62d41afedd894232c9c0f4/src/assets/image1.svg);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
