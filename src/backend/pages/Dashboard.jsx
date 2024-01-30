@@ -7,7 +7,7 @@ export const Dashboard = () => {
   return (
     <ViewPlatform>
       <InsideBar />
-      <Title>Logado</Title>
+      <Title>Olá, jogador.</Title>
       <SubTitle>Alpha - Versão 0.0.1 (Preview)</SubTitle>
     </ViewPlatform>
   )

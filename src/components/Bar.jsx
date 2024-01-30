@@ -94,13 +94,7 @@ export const Bar = () => {
 
       <ListDrop id='dropdownSpells'>
         <Exit onClick={dropSpells} className="bi bi-x-square-fill" />
-        <BtnBar>Livro do Jogador</BtnBar>
-        <BtnBar>Guia de Volo</BtnBar>
-        <BtnBar>Guia de Eberron</BtnBar>
-        <BtnBar>Guia de Wildemount</BtnBar>
-        <BtnBar>Guia de Ravnica</BtnBar>
-        <BtnBar>Guia de Ravenloft</BtnBar>
-        <BtnBar>Odisseia Mítica de Theros</BtnBar>
+        <BtnBar onClick={() => navigate('/magias/truques')}>Truques</BtnBar>
       </ListDrop>
 
       <ListProfile id='dropdownProfile'>

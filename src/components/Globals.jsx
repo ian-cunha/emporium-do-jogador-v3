@@ -18,6 +18,35 @@ width: 100vw;
 height: 100vh;
 `
 
+export const Box = styled.div`
+display: flex;
+flex-direction: column;
+padding: 24px;
+margin: 5px;
+width: 650px;
+height: 370px;
+border-radius: 5px;
+color: rgba(18,18,18, 0.8);
+background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/7dbff535447beb3d91ca6eee77696c8fc9f07a46/src/assets/paper.svg);
+background-repeat: no-repeat;
+@media (max-width: 768px) {
+  width: 100%;
+  height: 450px;
+  }
+`
+
+export const FlexBox = styled.div`
+  padding-top: 90px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+`
+
 export const ImageLogo = styled.img`
 width: 130px;
 cursor: pointer;
@@ -396,6 +425,30 @@ font-size: 1em;
 text-align: center;
 font-weight: 500;
 margin: 15px;
+@media (max-width: 768px) {
+}
+`
+
+export const TitleBox = styled.h2`
+font-weight: 900;
+margin-bottom: 2px;
+margin-top: 2px;
+@media (max-width: 768px) {
+}
+`
+
+export const SubBox = styled.h3`
+font-weight: 600;
+margin-bottom: 2px;
+margin-top: 2px;
+@media (max-width: 768px) {
+}
+`
+
+export const InfoBox = styled.p`
+font-weight: 500;
+margin-bottom: 2px;
+margin-top: 2px;
 @media (max-width: 768px) {
 }
 `

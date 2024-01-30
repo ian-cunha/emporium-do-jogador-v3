@@ -40,7 +40,9 @@ export const InsideBar = () => {
         <ListBar id="nav">
           <BtnBar className="bi bi-file-earmark-post"> Sua ficha</BtnBar>
           <BtnBar className="bi bi-collection"> Biblioteca</BtnBar>
+          <BtnBar className="bi bi-dice-6"> Dado</BtnBar>
           <BtnBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</BtnBar>
+          <BtnBar className="bi bi-gear"> Configurações</BtnBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>

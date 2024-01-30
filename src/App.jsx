@@ -7,6 +7,7 @@ import { auth } from "./config/Firebase"
 import { ProtectedRoute } from "./config/Protector"
 import { QuickRef } from "./pages/QuickRef";
 import { Dashboard } from "./backend/pages/Dashboard"
+import { Magic } from "./pages/library/magic";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,8 +34,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='*' element={<div>Oxi, acho que tu se perdeu!</div>} />
+        <Route path='*' element={<div>Oxi, acho que tu se visse!</div>} />
         <Route index path="/" element={<Home />} />
+        <Route index path="/magias/:id" element={<Magic />} />
         <Route path="/referencias" element={<QuickRef />} />
         <Route path="/login" element={<LoginRegister user={user} />} />
         <Route path="/plataforma" element={
