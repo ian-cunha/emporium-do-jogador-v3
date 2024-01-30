@@ -587,7 +587,7 @@ export const SpanFilter = styled.span`
       font-weight: bold;
     }
 @media (max-width: 768px) {
-  width: auto;
+  width: 50px;
   margin-left: 3px;
   margin-right: 3px;
 }
