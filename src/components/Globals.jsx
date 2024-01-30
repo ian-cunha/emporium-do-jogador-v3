@@ -42,7 +42,7 @@ export const FlexBox = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
   width: 100vw;
   overflow-x: hidden;
 `
