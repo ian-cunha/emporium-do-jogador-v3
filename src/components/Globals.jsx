@@ -58,10 +58,11 @@ width: 100vw;
 height: 80vh;
 border-radius: 5px;
 color: white;
+overflow:auto;
 @media (max-width: 768px) {
   width: 100%;
   height: 100vh;
-  margin-top: 90px;
+  margin-top: 0;
   }
 `
 
