@@ -256,7 +256,7 @@ margin: 0 5px;
 `
 
 export const Title = styled.h1`
-margin: 10px 20px;
+margin: 10px 24px;
 text-align: center;
 font-size: 1.8em;
 `
