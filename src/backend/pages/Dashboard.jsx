@@ -8,7 +8,7 @@ export const Dashboard = () => {
     <View>
       <InsideBar />
       <Title>Logado</Title>
-      <SubTitle>Alpha - Versão 0.0.1</SubTitle>
+      <SubTitle>Alpha - Versão 0.0.1 (Preview)</SubTitle>
     </View>
   )
 }
