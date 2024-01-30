@@ -260,6 +260,7 @@ margin: 15px;
 export const ItemQuick = styled.p`
 display: flex;
 margin: 15px;
+color: rgba(18, 18, 18, 0.9);
 font-weight: bold;
 `
 
@@ -291,7 +292,9 @@ display: flex;
 flex-direction: column;
 align-items: flex-start;
 justify-content: flex-start;
-background: white;
+background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/7dbff535447beb3d91ca6eee77696c8fc9f07a46/src/assets/paper.svg);
+background-repeat: no-repeat;
+background-size: cover;
 color: black;
 border-radius: 3px;
 @media (max-width: 768px) {
@@ -303,7 +306,7 @@ display: flex;
 flex-direction: row;
 background-position: 50px;
 background-image: url(https://raw.githubusercontent.com/ian-cunha/EmporiumDoJogador/f95457bd4dc1958c7c62d41afedd894232c9c0f4/src/assets/image1.svg);
-background-position: left;
+background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
 @media (max-width: 768px) {
