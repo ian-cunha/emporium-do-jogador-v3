@@ -4,7 +4,7 @@
 Embarque em suas aventuras de Dungeons & Dragons com o Emporium do Jogador e descubra um mundo de raças, classes e magias. Seja o mestre do seu destino e deixe que o Emporium do Jogador ilumine seu caminho através dos reinos mágicos e perigosos de D&D. Que as rolagens de dados estejam sempre a seu favor!
 
 ## 🔥 Introdução
-Utilizei React + JavaScript na webpage(fullstack), Banco de dados no Firebase com Auth + FireStore.
+JavaScript na webpage, Banco de dados no Firebase com Auth + FireStore.
 
 [Acessar site](https://emporiumdojogador.vercel.app/)
 
