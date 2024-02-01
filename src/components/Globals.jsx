@@ -78,6 +78,7 @@ margin-top: -30px;
 border-radius: 5px;
 color: white;
 overflow:auto;
+background-color: black;
 @media (max-width: 768px) {
   width: 85%;
   margin-top: 0;
