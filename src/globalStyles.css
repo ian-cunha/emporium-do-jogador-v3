@@ -28,8 +28,8 @@ html:focus-within {
 ::-webkit-scrollbar-thumb {
   background: black; 
   border-radius: 10px;
-  border-style: dashed;
-  border-color: green;
+  border-style: solid;
+  border-color: white;
 }
 
 ::-webkit-scrollbar-thumb:hover {
