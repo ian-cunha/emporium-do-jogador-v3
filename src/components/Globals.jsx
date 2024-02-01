@@ -574,7 +574,7 @@ padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
-border-style: dashed;
+border-style: solid;
 border-color: white;
 background: black;
 color: white;
