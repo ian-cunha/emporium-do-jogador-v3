@@ -40,7 +40,7 @@ border-radius: 10px;
 color: white;
 background: black;
 border-style: dashed;
-border-color: green;
+border-color: white;
 background-repeat: no-repeat;
 @media (max-width: 768px) {
   width: 100%;
@@ -437,7 +437,7 @@ background: black;
 background-repeat: no-repeat;
 background-size: cover;
 border-style: dashed;
-border-color: green;
+border-color: white;
 color: white;
 border-radius: 10px;
 @media (max-width: 768px) {
@@ -574,7 +574,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 border-style: dashed;
-border-color: green;
+border-color: white;
 background: black;
 color: white;
 font-weight: bold;
@@ -626,11 +626,11 @@ export const LiFilter = styled.li`
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-color: green;
+    border-color: white;
     border-bottom-style: solid;
     &:hover {
-      background: green;
-      color: white;
+      background: white;
+      color: black;
       font-weight: bold;
     }
 @media (max-width: 600px) {
