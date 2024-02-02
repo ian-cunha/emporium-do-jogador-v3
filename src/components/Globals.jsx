@@ -72,17 +72,22 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin: 15px;
-width: 45%;
 margin-top: -30px;
 border-radius: 5px;
 color: white;
 overflow:auto;
+left: 0;
+right: 0;
+margin-left: 18px;
+margin-right: 18px;
+width: 48vw;
+
 background-color: black;
 @media (max-width: 768px) {
-  width: 85%;
+  width: auto;
   margin-top: 0;
-  margin: 5px;
+  left: 0;
+  right: 0;
   }
 `
 
@@ -581,7 +586,6 @@ color: white;
 font-weight: bold;
 width: 100%;
 @media (max-width: 768px) {
-  width: 100%;
 }
 `
 
