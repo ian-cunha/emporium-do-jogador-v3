@@ -21,13 +21,14 @@ height: 100vh;
 `
 
 export const ViewPlatform = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100vw;
-height: 100vh;
-`
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
 export const Box = styled.div`
 display: flex;

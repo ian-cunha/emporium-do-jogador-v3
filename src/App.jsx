@@ -9,6 +9,9 @@ import { QuickRef } from "./pages/QuickRef";
 import { Dashboard } from "./backend/pages/Dashboard"
 import { Magic } from "./pages/library/magic";
 import { Loading } from "./components/Globals"
+import CharacterCreation from "./backend/pages/CharacterCreation";
+import { QuickRefInside } from "./backend/pages/QuickRefInside";
+import Settings from "./backend/pages/Settings";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,6 +49,21 @@ function App() {
         <Route path="/plataforma" element={
           <ProtectedRoute user={user}>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/ficha" element={
+          <ProtectedRoute user={user}>
+            <CharacterCreation />
+          </ProtectedRoute>
+        } />
+        <Route path="/referenciaplataforma" element={
+          <ProtectedRoute user={user}>
+            <QuickRefInside />
+          </ProtectedRoute>
+        } />
+        <Route path="/configuracoes" element={
+          <ProtectedRoute user={user}>
+            <Settings />
           </ProtectedRoute>
         } />
       </Routes>

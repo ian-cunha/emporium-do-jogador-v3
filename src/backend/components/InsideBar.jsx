@@ -177,11 +177,12 @@ export const InsideBar = () => {
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
-          <ButtonBar className="bi bi-file-earmark-post"> Sua ficha</ButtonBar>
+        <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/plataforma')}> Dashboard</ButtonBar>
+          <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/ficha')}> Sua ficha</ButtonBar>
           <ButtonBar className="bi bi-collection"> Biblioteca</ButtonBar>
           <ButtonBar className="bi bi-dice-6" onClick={toggleDicePopup}> Dado</ButtonBar>
-          <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</ButtonBar>
-          <ButtonBar className="bi bi-gear"> Configurações</ButtonBar>
+          <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referenciaplataforma')}> Referência Rápida</ButtonBar>
+          <ButtonBar className="bi bi-gear" onClick={() => navigate('/configuracoes')}> Configurações</ButtonBar>
         </ListBar>
         <BtnProfile onClick={dropProfile} className="bi bi-person" />
       </NavBar>

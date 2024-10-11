@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../config/Firebase";
-import { Bar } from '../components/Bar';
-import { FlexRefs, View, ItemName, ItemQuick, BlockRefs, RefTitle } from '../components/Globals';
+import { firestore } from "../../config/Firebase";
+import { FlexRefs, View, ItemName, ItemQuick, BlockRefs, RefTitle } from '../../components/Globals';
+import { InsideBar } from "../components/InsideBar";
 
-export const QuickRef = () => {
+export const QuickRefInside = () => {
   const colecao = 'tools';
   const documento = 'quickRef';
 
@@ -30,7 +30,7 @@ export const QuickRef = () => {
 
   return (
     <View>
-      <Bar />
+      <InsideBar />
       <BlockRefs>
         <RefTitle>Referência Rápida</RefTitle>
         {dataBase.map(([key, item], index) => (
