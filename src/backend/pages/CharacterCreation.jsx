@@ -23,6 +23,7 @@ export const CharacterCreation = () => {
     experience: 0,
     personalityTraits: '',
     specialAbilities: '',
+    avatar: '',  // Novo campo para o avatar
   });
 
   // Função para atualizar o estado do personagem
@@ -32,6 +33,21 @@ export const CharacterCreation = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  // Função para lidar com a seleção de avatar (imagem)
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCharacter((prevState) => ({
+          ...prevState,
+          avatar: reader.result,  // Armazenar a imagem como base64
+        }));
+      };
+      reader.readAsDataURL(file);  // Converte a imagem em base64
+    }
   };
 
   // Função para enviar os dados e salvar o personagem no Firestore
@@ -72,6 +88,7 @@ export const CharacterCreation = () => {
         experience: 0,
         personalityTraits: '',
         specialAbilities: '',
+        avatar: '',  // Limpar a foto ao criar um novo personagem
       });
     } catch (error) {
       console.error("Erro ao criar personagem:", error);
@@ -99,8 +116,22 @@ export const CharacterCreation = () => {
           <option value="Humano">Humano</option>
           <option value="Elfo">Elfo</option>
           <option value="Anão">Anão</option>
+          <option value="Halfling">Halfling</option>
+          <option value="Gnomo">Gnomo</option>
+          <option value="Meio-Elfo">Meio-Elfo</option>
           <option value="Meio-Orc">Meio-Orc</option>
-          <option value="Híbrido">Híbrido</option>
+          <option value="Draconato">Draconato</option>
+          <option value="Tiefling">Tiefling</option>
+          <option value="Aasimar">Aasimar</option>
+          <option value="Genasi">Genasi</option>
+          <option value="Tabaxi">Tabaxi</option>
+          <option value="Firbolg">Firbolg</option>
+          <option value="Tritão">Tritão</option>
+          <option value="Kenku">Kenku</option>
+          <option value="Lizardfolk">Lizardfolk</option>
+          <option value="Changeling">Changeling</option>
+          <option value="Shifter">Shifter</option>
+          <option value="Warforged">Warforged</option>
         </Select>
 
         <Label>Classe:</Label>
@@ -110,6 +141,15 @@ export const CharacterCreation = () => {
           <option value="Ladino">Ladino</option>
           <option value="Clérigo">Clérigo</option>
           <option value="Arqueiro">Arqueiro</option>
+          <option value="Paladino">Paladino</option>
+          <option value="Bárbaro">Bárbaro</option>
+          <option value="Monge">Monge</option>
+          <option value="Feiticeiro">Feiticeiro</option>
+          <option value="Warlock">Feiticeiro (Warlock)</option>
+          <option value="Druida">Druida</option>
+          <option value="Bardo">Bardo</option>
+          <option value="Brujo">Brujo</option>
+          <option value="Artífice">Artífice</option>
         </Select>
 
         <Label>Nível:</Label>
@@ -128,6 +168,21 @@ export const CharacterCreation = () => {
           name="experience"
           value={character.experience}
           onChange={handleInputChange}
+        />
+
+        {/* Novo campo de avatar */}
+        <Label>Avatar:</Label>
+        <AvatarPreview>
+          {character.avatar ? (
+            <img src={character.avatar} alt="Avatar Prévia" />
+          ) : (
+            <span>Selecione uma imagem</span>
+          )}
+        </AvatarPreview>
+        <InputFile
+          type="file"
+          accept="image/*"
+          onChange={handleAvatarChange}
         />
 
         <h3>Atributos</h3>
@@ -244,20 +299,20 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  background-color: #000; /* Fundo preto */
+  background-color: #000;
   height: 100vh;
-  color: #fff; /* Texto branco */
+  color: #fff;
 `;
 
 const Title = styled.h1`
   font-size: 36px;
   margin-top: 30px;
   margin-bottom: 30px;
-  color: #fff; /* Título branco */
+  color: #fff;
 `;
 
 const Form = styled.form`
-  background-color: #111; /* Fundo escuro para o formulário */
+  background-color: #111;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
@@ -271,17 +326,17 @@ const Form = styled.form`
 const Label = styled.label`
   font-size: 16px;
   margin-bottom: 5px;
-  color: #ccc; /* Labels em cinza claro */
+  color: #ccc;
 `;
 
 const Input = styled.input`
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #333; /* Borda mais escura */
+  border: 1px solid #333;
   border-radius: 8px;
   margin-bottom: 15px;
-  background-color: #222; /* Fundo escuro para os inputs */
-  color: #fff; /* Texto branco */
+  background-color: #222;
+  color: #fff;
 `;
 
 const Select = styled.select`
@@ -316,10 +371,32 @@ const Attribute = styled.div`
   width: 48%;
 `;
 
+const AvatarPreview = styled.div`
+  margin-bottom: 15px;
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  span {
+    color: #ccc;
+  }
+`;
+
+const InputFile = styled.input`
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #222;
+  color: #fff;
+`;
+
 const Button = styled.button`
   padding: 12px 20px;
   font-size: 16px;
-  background-color: #e67e22; /* Laranja para o botão */
+  background-color: #e67e22;
   color: white;
   border: none;
   border-radius: 8px;
