@@ -38,10 +38,6 @@ export const LoginRegister = ({ user }) => {
         await setDoc(doc(db, 'users', user.email), {
           email: user.email,
           createdAt: new Date(),
-          profile: {
-            name: '', // Deixe o nome vazio ou pegue de outro campo, se necessário
-            avatar: '', // Deixe o avatar vazio ou com o valor padrão
-          },
         });
 
         // Aqui você pode redirecionar ou fazer o que for necessário após o cadastro
@@ -76,10 +72,6 @@ export const LoginRegister = ({ user }) => {
           await setDoc(userRef, {
             email: user.email,
             createdAt: new Date(),
-            profile: {
-              name: '', // Deixe o nome vazio ou pegue de outro campo, se necessário
-              avatar: '', // Deixe o avatar vazio ou com o valor padrão
-            },
           });
         }
 

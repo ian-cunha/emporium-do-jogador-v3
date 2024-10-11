@@ -1,33 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ViewPlatform, Title, SubTitle } from '../../components/Globals';
 import { InsideBar } from '../components/InsideBar';
 import styled from 'styled-components';
+import { auth } from '../../config/Firebase';
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+
+const db = getFirestore();
 
 export const Dashboard = () => {
-  const [playerStats, setPlayerStats] = useState({
-    name: 'Aragorn',
-    level: 5,
-    class: 'Ranger',
-    experience: 1200,
-    hitPoints: 45,
-    strength: 14,
-    dexterity: 18,
-    intelligence: 12,
-    charisma: 10,
-    completedQuests: 3,
-  });
-
+  const [playerStats, setPlayerStats] = useState(null); // Inicializando com null
   const [playerPosition, setPlayerPosition] = useState({ x: 5, y: 5 });
   const [missionStarted, setMissionStarted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Para controlar o modal
+  const currentUser = auth.currentUser;
 
-  // Função para iniciar a missão
+  // Função para buscar dados do personagem principal
+  const fetchMainCharacter = async () => {
+    if (currentUser) {
+      try {
+        const q = query(
+          collection(db, 'users', currentUser.email, 'characters'),
+          where('isMain', '==', true)
+        );
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          const mainCharacter = querySnapshot.docs[0].data(); // Supondo que só tenha um personagem principal
+          setPlayerStats(mainCharacter); // Atualiza os stats com o personagem principal
+        } else {
+          setPlayerStats(null); // Caso não haja personagem principal
+        }
+      } catch (error) {
+        console.error('Erro ao buscar personagem principal:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchMainCharacter();
+  }, [currentUser]); // Executa apenas quando o usuário estiver autenticado
+
   const startMission = () => {
     setMissionStarted(true);
     setIsModalOpen(true); // Abre o modal quando a missão começa
   };
 
-  // Função para mover o jogador
   const movePlayer = (direction) => {
     setPlayerPosition((prevPosition) => {
       let newX = prevPosition.x;
@@ -42,11 +58,23 @@ export const Dashboard = () => {
     });
   };
 
-  // Função para fechar o modal
   const closeModal = () => {
     setIsModalOpen(false);
     setMissionStarted(false); // A missão não está mais iniciada quando fecha o modal
   };
+
+  // Se não há personagem principal, exibe uma mensagem de "sem dados"
+  if (playerStats === null) {
+    return (
+      <ViewPlatform>
+        <InsideBar />
+        <Container>
+          <Title>Sem Personagem Principal</Title>
+          <SubTitle>Por favor, crie ou selecione um personagem principal para continuar.</SubTitle>
+        </Container>
+      </ViewPlatform>
+    );
+  }
 
   return (
     <ViewPlatform>

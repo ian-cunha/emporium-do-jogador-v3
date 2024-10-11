@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { InsideBar } from '../components/InsideBar';
-import { auth } from "../../config/Firebase";  // Certifique-se de que o Firebase Auth está configurado corretamente
+import { auth, firestore } from "../../config/Firebase";  // Atualizado para não importar o storage
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 const db = getFirestore();  // Inicializando o Firestore
@@ -21,7 +21,6 @@ export const CharacterCreation = () => {
     background: '',
     equipment: '',
     experience: 0,
-    photo: null,
     personalityTraits: '',
     specialAbilities: '',
   });
@@ -35,15 +34,6 @@ export const CharacterCreation = () => {
     }));
   };
 
-  // Função para lidar com upload de foto
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setCharacter((prevState) => ({
-      ...prevState,
-      photo: file,
-    }));
-  };
-
   // Função para enviar os dados e salvar o personagem no Firestore
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,8 +44,8 @@ export const CharacterCreation = () => {
       return;
     }
 
-    // Criar o documento de personagem dentro da coleção 'characters' do usuário
     try {
+      // Criar o documento de personagem dentro da coleção 'characters' do usuário
       await setDoc(doc(db, 'users', currentUser.email, 'characters', character.name), {
         ...character,
         createdAt: new Date(),
@@ -65,7 +55,7 @@ export const CharacterCreation = () => {
       console.log('Personagem criado com sucesso');
       alert('Seu personagem foi criado com sucesso!');
 
-      // Aqui você pode redirecionar o usuário ou limpar o formulário se desejar
+      // Limpar o formulário após sucesso
       setCharacter({
         name: '',
         race: 'Humano',
@@ -80,7 +70,6 @@ export const CharacterCreation = () => {
         background: '',
         equipment: '',
         experience: 0,
-        photo: null,
         personalityTraits: '',
         specialAbilities: '',
       });
@@ -242,9 +231,6 @@ export const CharacterCreation = () => {
           onChange={handleInputChange}
           placeholder="Ex: Fúria do Guerreiro, Magia do Mago, etc."
         />
-
-        <Label>Foto do Personagem:</Label>
-        <Input type="file" onChange={handleFileChange} accept="image/*" />
 
         <Button type="submit">Criar Personagem</Button>
       </Form>
