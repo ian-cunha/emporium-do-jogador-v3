@@ -125,3 +125,205 @@ html {
     transform: rotate(360deg);
   }
 } 
+
+/* Overlay para o popup */
+.dice-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro e transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Garante que o popup esteja acima de outros elementos */
+}
+
+/* Estilos do popup */
+.dice-popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px; /* Tamanho fixo para o popup */
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para dar destaque */
+}
+
+/* Botão de fechar no canto superior direito */
+.close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Overlay para o popup */
+.dice-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro e transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Garante que o popup esteja acima de outros elementos */
+}
+
+/* Estilos do popup */
+.dice-popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px; /* Tamanho fixo para o popup */
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para dar destaque */
+}
+
+/* Botão de fechar no canto superior direito */
+.dice-popup .close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  padding: 0;
+}
+
+/* Estilos para os botões dentro do popup */
+.dice-popup button {
+  padding: 12px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border: 2px solid #333; /* Bordas mais grossas para botões */
+  background-color: white;
+  color: #333;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Botões com fundo branco e texto preto */
+.dice-popup button:hover {
+  background-color: #333; /* Fundo preto quando o botão é hover */
+  color: white; /* Texto branco quando o botão é hover */
+}
+
+/* Estilo do seletor de dado */
+.dice-popup select {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #333; /* Bordas mais grossas para o seletor */
+  background-color: white;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Mudança de cor do seletor quando hover */
+.dice-popup select:hover {
+  border-color: #333;
+}
+
+/* Título do popup */
+.dice-popup h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Texto do resultado do dado */
+.dice-popup p {
+  font-size: 18px;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Animação de chacoalhar o dado */
+.dice-rotate {
+  animation: shakeDice 2s ease-out;
+}
+
+/* Efeito de rotação e movimento de chacoalhar */
+@keyframes shakeDice {
+  0% {
+    transform: rotate(0deg) translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: rotate(45deg) translate(10px, -10px) scale(1.1);
+  }
+  50% {
+    transform: rotate(90deg) translate(-10px, 10px) scale(1);
+  }
+  75% {
+    transform: rotate(135deg) translate(5px, -5px) scale(1.05);
+  }
+  100% {
+    transform: rotate(180deg) translate(0px, 0px) scale(1);
+  }
+}
+
+/* Overlay do popup */
+.dice-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Estilos do popup */
+.dice-popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fechar o popup */
+.close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  padding: 0;
+}
+
+/* Ajuste de botão de lançamento de dado */
+button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
