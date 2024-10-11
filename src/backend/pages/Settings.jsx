@@ -168,6 +168,7 @@ export const Settings = () => {
 
           <Section>
             <h3>Dados do Personagem</h3>
+            <Label>Nome:</Label>
             <Input
               type="text"
               name="name"
@@ -175,6 +176,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Nome"
             />
+
+            <Label>Raça:</Label>
             <Input
               type="text"
               name="race"
@@ -182,6 +185,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Raça"
             />
+
+            <Label>Classe:</Label>
             <Input
               type="text"
               name="class"
@@ -189,6 +194,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Classe"
             />
+
+            <Label>Nível:</Label>
             <Input
               type="number"
               name="level"
@@ -196,6 +203,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Nível"
             />
+
+            <Label>Força:</Label>
             <Input
               type="number"
               name="strength"
@@ -203,6 +212,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Força"
             />
+
+            <Label>Destreza:</Label>
             <Input
               type="number"
               name="dexterity"
@@ -210,6 +221,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Destreza"
             />
+
+            <Label>Constituição:</Label>
             <Input
               type="number"
               name="constitution"
@@ -217,6 +230,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Constituição"
             />
+
+            <Label>Inteligência:</Label>
             <Input
               type="number"
               name="intelligence"
@@ -224,6 +239,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Inteligência"
             />
+
+            <Label>Sabedoria:</Label>
             <Input
               type="number"
               name="wisdom"
@@ -231,6 +248,8 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Sabedoria"
             />
+
+            <Label>Carisma:</Label>
             <Input
               type="number"
               name="charisma"
@@ -238,12 +257,16 @@ export const Settings = () => {
               onChange={handleInputChange}
               placeholder="Carisma"
             />
+
+            <Label>Histórico:</Label>
             <TextArea
               name="background"
               value={characterData.background}
               onChange={handleInputChange}
               placeholder="Histórico"
             />
+
+            <Label>Equipamentos:</Label>
             <TextArea
               name="equipment"
               value={characterData.equipment}
@@ -382,6 +405,14 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+`;
+
+const Label = styled.label`
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 80%;
 `;
 
 const Input = styled.input`
