@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { InsideBar } from '../components/InsideBar';
+import { auth } from "../../config/Firebase";  // Certifique-se de que o Firebase Auth está configurado corretamente
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+
+const db = getFirestore();  // Inicializando o Firestore
 
 export const CharacterCreation = () => {
   const [character, setCharacter] = useState({
@@ -40,11 +44,50 @@ export const CharacterCreation = () => {
     }));
   };
 
-  // Função para enviar os dados (por exemplo, salvar ou enviar para um backend)
-  const handleSubmit = (e) => {
+  // Função para enviar os dados e salvar o personagem no Firestore
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Ficha do personagem:', character);
-    // Aqui você pode enviar os dados para uma API ou fazer o que for necessário
+
+    const currentUser = auth.currentUser;  // Obter o usuário autenticado
+    if (!currentUser) {
+      alert('Você precisa estar logado para criar um personagem.');
+      return;
+    }
+
+    // Criar o documento de personagem dentro da coleção 'characters' do usuário
+    try {
+      await setDoc(doc(db, 'users', currentUser.email, 'characters', character.name), {
+        ...character,
+        createdAt: new Date(),
+        userId: currentUser.uid,  // Adiciona o ID do usuário para referência
+      });
+
+      console.log('Personagem criado com sucesso');
+      alert('Seu personagem foi criado com sucesso!');
+
+      // Aqui você pode redirecionar o usuário ou limpar o formulário se desejar
+      setCharacter({
+        name: '',
+        race: 'Humano',
+        class: 'Guerreiro',
+        level: 1,
+        strength: 10,
+        dexterity: 10,
+        constitution: 10,
+        intelligence: 10,
+        wisdom: 10,
+        charisma: 10,
+        background: '',
+        equipment: '',
+        experience: 0,
+        photo: null,
+        personalityTraits: '',
+        specialAbilities: '',
+      });
+    } catch (error) {
+      console.error("Erro ao criar personagem:", error);
+      alert('Ocorreu um erro ao salvar seu personagem. Tente novamente.');
+    }
   };
 
   return (

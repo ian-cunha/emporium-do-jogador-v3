@@ -12,6 +12,7 @@ import { Loading } from "./components/Globals"
 import CharacterCreation from "./backend/pages/CharacterCreation";
 import { QuickRefInside } from "./backend/pages/QuickRefInside";
 import Settings from "./backend/pages/Settings";
+import CharactersPage from "./backend/pages/CharactersPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -64,6 +65,11 @@ function App() {
         <Route path="/configuracoes" element={
           <ProtectedRoute user={user}>
             <Settings />
+          </ProtectedRoute>
+        } />
+        <Route path="/fichas" element={
+          <ProtectedRoute user={user}>
+            <CharactersPage />
           </ProtectedRoute>
         } />
       </Routes>

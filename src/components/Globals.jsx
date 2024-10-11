@@ -268,7 +268,7 @@ width: 300px;
 `
 
 export const ButtonBar = styled.button`
-padding: 10px 20px;
+padding: 10px 10px;
 margin: 5px 5px;
 cursor: pointer;
 border-color: white;
