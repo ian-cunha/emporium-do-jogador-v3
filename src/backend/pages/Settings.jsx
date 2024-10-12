@@ -432,6 +432,10 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Section = styled.div`

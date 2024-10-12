@@ -607,6 +607,7 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
+  margin: 5px;
   padding: 12px 20px;
   font-size: 16px;
   background-color: #e67e22;
