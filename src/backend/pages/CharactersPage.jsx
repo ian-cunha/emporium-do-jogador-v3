@@ -64,13 +64,21 @@ export const CharactersPage = () => {
 
   const handleDelete = async (id) => {
     const currentUser = auth.currentUser;
+  
+    // Adiciona a confirmação
+    const confirmDelete = window.confirm("Tem certeza que deseja excluir este personagem?");
+    
+    if (!confirmDelete) {
+      return; // Se o usuário cancelar, não faz nada
+    }
+  
     try {
       await deleteDoc(doc(db, 'users', currentUser.email, 'characters', id));
       setCharacters(characters.filter(character => character.id !== id));
     } catch (err) {
       console.error("Erro ao excluir personagem:", err);
     }
-  };
+  };  
 
   const handleUpdate = async (id, updatedData) => {
     const currentUser = auth.currentUser;
@@ -143,9 +151,9 @@ export const CharactersPage = () => {
 
   const handleDownloadPDF = (character) => {
     const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'pt',
-      format: 'letter',
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'letter',
     });
 
     const margin = 40;
@@ -178,11 +186,11 @@ export const CharactersPage = () => {
 
     // Add Avatar (optional)
     if (character.avatar) {
-      doc.addImage(character.avatar, 'JPEG', margin, yPosition, 80, 80);
+        doc.addImage(character.avatar, 'JPEG', margin, yPosition, 80, 80);
     } else {
-      doc.setFillColor(200, 200, 200);
-      doc.rect(margin, yPosition, 80, 80, 'F');
-      doc.text("Sem Avatar", margin + 10, yPosition + 40);
+        doc.setFillColor(200, 200, 200);
+        doc.rect(margin, yPosition, 80, 80, 'F');
+        doc.text("Sem Avatar", margin + 10, yPosition + 40);
     }
 
     yPosition += 100;
@@ -196,21 +204,21 @@ export const CharactersPage = () => {
     const attributeYPositions = [yPosition, yPosition + 20, yPosition + 40];
 
     const attributes = [
-      { label: 'Força', value: character.strength },
-      { label: 'Destreza', value: character.dexterity },
-      { label: 'Constituição', value: character.constitution },
-      { label: 'Inteligência', value: character.intelligence },
-      { label: 'Sabedoria', value: character.wisdom },
-      { label: 'Carisma', value: character.charisma },
+        { label: 'Força', value: character.strength },
+        { label: 'Destreza', value: character.dexterity },
+        { label: 'Constituição', value: character.constitution },
+        { label: 'Inteligência', value: character.intelligence },
+        { label: 'Sabedoria', value: character.wisdom },
+        { label: 'Carisma', value: character.charisma },
     ];
 
     attributes.forEach((attr, index) => {
-      const col = index % 3;
-      const row = Math.floor(index / 3);
-      const xPos = attributeXPositions[col];
-      const yPos = attributeYPositions[row];
+        const col = index % 3;
+        const row = Math.floor(index / 3);
+        const xPos = attributeXPositions[col];
+        const yPos = attributeYPositions[row];
 
-      doc.text(`${attr.label}: ${attr.value}`, xPos, yPos);
+        doc.text(`${attr.label}: ${attr.value}`, xPos, yPos);
     });
 
     yPosition += 60;
@@ -234,23 +242,22 @@ export const CharactersPage = () => {
     yPosition += 20;
 
     const infoSections = [
-      { label: "Antecedente", content: character.background },
-      { label: "Equipamento", content: character.equipment },
-      { label: "Habilidades Especiais", content: character.specialAbilities }
+        { label: "Antecedente", content: character.background },
+        { label: "Equipamento", content: Array.isArray(character.equipment) ? character.equipment.join(', ') : character.equipment || "N/A" },
+        { label: "Habilidades Especiais", content: character.specialAbilities }
     ];
 
     infoSections.forEach(section => {
-      doc.setFont("helvetica", "bold");
-      doc.text(`${section.label}:`, margin, yPosition);
-      doc.setFont("helvetica", "normal");
-      doc.text(section.content || "N/A", margin + 100, yPosition, { maxWidth: 450 });
-      yPosition += 40;
+        doc.setFont("helvetica", "bold");
+        doc.text(`${section.label}:`, margin, yPosition);
+        doc.setFont("helvetica", "normal");
+        doc.text(section.content, margin + 100, yPosition, { maxWidth: 450 });
+        yPosition += 40;
     });
 
     // Save the PDF
     doc.save(`${character.name}-ficha-dnd.pdf`);
-  };
-
+};
 
   if (loading) {
     return <LoadingMessage>Carregando personagens...</LoadingMessage>;
@@ -297,7 +304,7 @@ export const CharactersPage = () => {
                 <InfoSection>
                   <InfoTitle>Informações Adicionais</InfoTitle>
                   <div>Antecedente: {character.background}</div>
-                  <div>Equipamento: {character.equipment}</div>
+                  <div>Equipamento: {Array.isArray(character.equipment) ? character.equipment.join(', ') : character.equipment}</div>
                   <div>Habilidades Especiais: {character.specialAbilities}</div>
                 </InfoSection>
               </AttributesSection>
