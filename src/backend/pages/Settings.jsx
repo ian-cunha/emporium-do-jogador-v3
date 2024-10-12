@@ -131,7 +131,7 @@ export const Settings = () => {
   return (
     <Container>
       <InsideBar />
-      <Title>Configurações de Personagem</Title>
+      <Title>Configurações</Title>
 
       <SelectSection>
         {!selectedCharacter ? (

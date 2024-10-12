@@ -490,6 +490,10 @@ const CharacterCard = styled.div`
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 95vw;
+  }
 `;
 
 const Avatar = styled.img`
@@ -551,6 +555,10 @@ const Actions = styled.div`
   display: flex;
   gap: 10px;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const ActionButton = styled.button`

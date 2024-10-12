@@ -24,8 +24,8 @@ export const Dashboard = () => {
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
           const mainCharacter = querySnapshot.docs[0].data();
-          // Garantir que equipment seja um array
           setPlayerStats({ ...mainCharacter, equipment: mainCharacter.equipment || [] });
+          console.log(mainCharacter); // Log para verificar os dados
         } else {
           setPlayerStats(null);
         }
@@ -180,6 +180,7 @@ const StatsBox = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap; /* Permite que os cartões se movam para a próxima linha em telas menores */
   width: 100%;
   max-width: 900px;
 `;
@@ -189,7 +190,7 @@ const Card = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 30%;
+  width: calc(30% - 20px); /* Ajusta a largura dos cartões */
   text-align: center;
   color: #333;
 
@@ -202,6 +203,14 @@ const Card = styled.div`
     font-size: 24px;
     font-weight: bold;
     color: #3a8dff;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(45% - 20px); /* Largura em telas menores */
+  }
+
+  @media (max-width: 480px) {
+    width: 100%; /* Largura total em telas muito pequenas */
   }
 `;
 
@@ -229,7 +238,7 @@ const AttributeCard = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 22%;
+  width: calc(22% - 20px);
   text-align: center;
   color: #333;
 
@@ -242,6 +251,14 @@ const AttributeCard = styled.div`
     font-size: 18px;
     font-weight: bold;
     color: #e67e22;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(45% - 20px);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `;
 
@@ -278,7 +295,8 @@ const ModalContent = styled.div`
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 500px;
+  width: 90%; /* Largura responsiva */
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -333,4 +351,5 @@ const MovementButtons = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap; /* Permite que os botões se movam para a próxima linha em telas menores */
 `;
