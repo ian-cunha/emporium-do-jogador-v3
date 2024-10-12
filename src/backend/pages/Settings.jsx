@@ -23,6 +23,8 @@ export const Settings = () => {
     background: '',
     equipment: '',
     avatar: '',
+    hitPoints: 10,  // Novo campo de HP
+    experience: 0,  // Novo campo de Experiência
   });
   const [showModal, setShowModal] = useState(false); // Controla a exibição do modal de troca de personagem
   const currentUser = auth.currentUser;
@@ -275,6 +277,25 @@ export const Settings = () => {
               value={characterData.equipment}
               onChange={handleInputChange}
               placeholder="Equipamentos"
+            />
+
+            {/* Campos de HP e Experiência */}
+            <Label>Pontos de Vida (HP):</Label>
+            <Input
+              type="number"
+              name="hitPoints"
+              value={characterData.hitPoints}
+              onChange={handleInputChange}
+              placeholder="Pontos de Vida"
+            />
+
+            <Label>Experiência:</Label>
+            <Input
+              type="number"
+              name="experience"
+              value={characterData.experience}
+              onChange={handleInputChange}
+              placeholder="Experiência"
             />
           </Section>
 

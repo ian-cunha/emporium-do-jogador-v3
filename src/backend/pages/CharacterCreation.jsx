@@ -24,6 +24,7 @@ export const CharacterCreation = () => {
     personalityTraits: '',
     specialAbilities: '',
     avatar: '',  // Novo campo para o avatar
+    hitPoints: 10,  // Pontos de Vida (HP)
   });
 
   // Função para atualizar o estado do personagem
@@ -50,6 +51,13 @@ export const CharacterCreation = () => {
     }
   };
 
+  // Função para calcular os Pontos de Vida (HP) com base na classe
+  const calculateHitPoints = (level, constitution) => {
+    const baseHP = 10; // Base HP para todas as classes
+    const constitutionModifier = Math.floor((constitution - 10) / 2);
+    return baseHP + (level - 1) * 5 + constitutionModifier;
+  };
+
   // Função para enviar os dados e salvar o personagem no Firestore
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,10 +68,14 @@ export const CharacterCreation = () => {
       return;
     }
 
+    // Calcular os pontos de vida (HP) antes de salvar
+    const hitPoints = calculateHitPoints(character.level, character.constitution);
+
     try {
       // Criar o documento de personagem dentro da coleção 'characters' do usuário
       await setDoc(doc(db, 'users', currentUser.email, 'characters', character.name), {
         ...character,
+        hitPoints,  // Adicionando os Pontos de Vida calculados
         createdAt: new Date(),
         userId: currentUser.uid,  // Adiciona o ID do usuário para referência
       });
@@ -89,6 +101,7 @@ export const CharacterCreation = () => {
         personalityTraits: '',
         specialAbilities: '',
         avatar: '',  // Limpar a foto ao criar um novo personagem
+        hitPoints: 10,  // Resetar pontos de vida
       });
     } catch (error) {
       console.error("Erro ao criar personagem:", error);
@@ -160,6 +173,14 @@ export const CharacterCreation = () => {
           onChange={handleInputChange}
           min="1"
           max="20"
+        />
+
+        <Label>Pontos de Vida (HP):</Label>
+        <Input
+          type="number"
+          name="hitPoints"
+          value={character.hitPoints}
+          readOnly
         />
 
         <Label>Pontos de Experiência:</Label>

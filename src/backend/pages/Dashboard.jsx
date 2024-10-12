@@ -83,6 +83,7 @@ export const Dashboard = () => {
         <Title>Saudações, {playerStats.name}.</Title>
         <SubTitle>{playerStats.class} - Nível {playerStats.level}</SubTitle>
 
+        {/* Caixa de Estatísticas */}
         <StatsBox>
           <Card>
             <h3>Pontos de Vida</h3>
@@ -94,10 +95,11 @@ export const Dashboard = () => {
           </Card>
           <Card>
             <h3>Missões Completas</h3>
-            <p>{playerStats.completedQuests}</p>
+            <p>{playerStats.completedQuests || 0}</p>
           </Card>
         </StatsBox>
 
+        {/* Atributos */}
         <AttributesBox>
           <h4>Atributos</h4>
           <AttributeCard>
@@ -118,7 +120,7 @@ export const Dashboard = () => {
           </AttributeCard>
         </AttributesBox>
 
-        {/* Botão Iniciar Missão - Só aparece se a missão não estiver iniciada */}
+        {/* Botão Iniciar Missão */}
         {!missionStarted && !isModalOpen && (
           <Button primary onClick={startMission}>Iniciar Missão</Button>
         )}
