@@ -118,6 +118,14 @@ export const Dashboard = () => {
             <h5>Carisma</h5>
             <p>{playerStats.charisma}</p>
           </AttributeCard>
+          <AttributeCard>
+            <h5>Constituição</h5>
+            <p>{playerStats.constitution}</p>
+          </AttributeCard>
+          <AttributeCard>
+            <h5>Sabedoria</h5>
+            <p>{playerStats.wisdom}</p>
+          </AttributeCard>
         </AttributesBox>
 
         {/* Botão Iniciar Missão */}
