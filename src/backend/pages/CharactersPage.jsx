@@ -4,6 +4,7 @@ import { getFirestore, collection, getDocs, query, where, deleteDoc, doc, update
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import { InsideBar } from '../components/InsideBar';
+import { jsPDF } from "jspdf"; // Importando o jsPDF
 
 const db = getFirestore();
 
@@ -25,10 +26,9 @@ export const CharactersPage = () => {
     background: '',
     equipment: '',
     specialAbilities: '',
-    avatar: '', // Para o avatar
+    avatar: '',
   });
 
-  // Carregar os personagens do usuário
   useEffect(() => {
     const fetchCharacters = async () => {
       const currentUser = auth.currentUser;
@@ -59,7 +59,6 @@ export const CharactersPage = () => {
     fetchCharacters();
   }, []);
 
-  // Função para excluir um personagem
   const handleDelete = async (id) => {
     const currentUser = auth.currentUser;
     try {
@@ -70,7 +69,6 @@ export const CharactersPage = () => {
     }
   };
 
-  // Função para atualizar um personagem
   const handleUpdate = async (id, updatedData) => {
     const currentUser = auth.currentUser;
     try {
@@ -81,13 +79,12 @@ export const CharactersPage = () => {
           character.id === id ? { ...character, ...updatedData } : character
         )
       );
-      setSelectedCharacter(null);  // Fechar formulário de edição
+      setSelectedCharacter(null); 
     } catch (err) {
       console.error("Erro ao atualizar personagem:", err);
     }
   };
 
-  // Função para compartilhar (copiar para a área de transferência)
   const handleShare = (character) => {
     const characterInfo = `
       Nome: ${character.name}
@@ -108,7 +105,6 @@ export const CharactersPage = () => {
     });
   };
 
-  // Função para preencher o formulário quando um personagem for editado
   const handleEditCharacter = (character) => {
     setSelectedCharacter(character);
     setFormData({
@@ -124,17 +120,66 @@ export const CharactersPage = () => {
       background: character.background,
       equipment: character.equipment,
       specialAbilities: character.specialAbilities,
-      avatar: character.avatar || '',  // Caso o avatar seja uma URL
+      avatar: character.avatar || '', 
     });
   };
 
-  // Função para lidar com as alterações no formulário de edição
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleDownloadPDF = (character) => {
+    const doc = new jsPDF();
+
+    // Definir a fonte e o tamanho
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(16);
+
+    // Cabeçalho - Título
+    doc.setFontSize(22);
+    doc.text("Ficha de Personagem - D&D", 105, 20, null, null, 'center');
+    doc.setFontSize(14);
+
+    // Avatar no canto superior esquerdo
+    if (character.avatar) {
+      doc.addImage(character.avatar, 'JPEG', 15, 30, 30, 30); // posição (15, 30) e tamanho (30x30)
+    } else {
+      doc.setTextColor(200, 200, 200); // Caso o avatar não exista, coloque uma cor de texto cinza
+      doc.text("Sem Avatar", 55, 45);
+    }
+
+    // Nome do Personagem
+    doc.setTextColor(0, 0, 0); // Cor preta
+    doc.text(`Nome: ${character.name}`, 55, 45);
+
+    // Classe e Nível
+    doc.text(`Classe: ${character.class}`, 55, 55);
+    doc.text(`Nível: ${character.level}`, 55, 65);
+
+    // Atributos
+    doc.text("Atributos", 15, 85);
+    doc.setFontSize(12);
+    doc.text(`Força: ${character.strength}`, 15, 95);
+    doc.text(`Destreza: ${character.dexterity}`, 15, 105);
+    doc.text(`Constituição: ${character.constitution}`, 15, 115);
+    doc.text(`Inteligência: ${character.intelligence}`, 15, 125);
+    doc.text(`Sabedoria: ${character.wisdom}`, 15, 135);
+    doc.text(`Carisma: ${character.charisma}`, 15, 145);
+
+    // Informações Adicionais
+    doc.setFontSize(14);
+    doc.text("Informações Adicionais", 15, 160);
+    doc.setFontSize(12);
+    doc.text(`Antecedente: ${character.background}`, 15, 170);
+    doc.text(`Equipamento: ${character.equipment}`, 15, 180);
+    doc.text(`Habilidades Especiais: ${character.specialAbilities}`, 15, 190);
+
+    // Salvar o PDF
+    doc.save(`${character.name}-ficha-dnd.pdf`);
   };
 
   if (loading) {
@@ -160,7 +205,6 @@ export const CharactersPage = () => {
               <CharacterClass>Classe: {character.class}</CharacterClass>
               <CharacterLevel>Nível: {character.level}</CharacterLevel>
               
-              {/* Exibindo todos os atributos e outras informações do personagem */}
               <AttributesSection>
                 <AttributeList>
                   <AttributeTitle>Atributos</AttributeTitle>
@@ -189,6 +233,7 @@ export const CharactersPage = () => {
                 <ActionButton onClick={() => handleEditCharacter(character)}>Editar</ActionButton>
                 <ActionButton onClick={() => handleDelete(character.id)}>Excluir</ActionButton>
                 <ActionButton onClick={() => handleShare(character)}>Compartilhar</ActionButton>
+                <ActionButton onClick={() => handleDownloadPDF(character)}>Baixar PDF</ActionButton>
               </Actions>
             </CharacterCard>
           ))}
@@ -197,9 +242,7 @@ export const CharactersPage = () => {
 
       {selectedCharacter && (
         <UpdateForm>
-          <h2>Atualizar Personagem: {selectedCharacter.name}</h2>
-
-          {/* Campos de entrada para editar todos os atributos do personagem */}
+          <h2>Editar Personagem</h2>
           <Input
             type="text"
             name="name"
