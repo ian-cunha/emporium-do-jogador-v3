@@ -36,7 +36,11 @@ export const CharactersPage = () => {
       const currentUser = auth.currentUser;
 
       if (!currentUser) {
-        return <Navigate to="/login" />;
+        // Redirecionamento não deve ser feito dentro de useEffect
+        // Usaremos um estado para gerenciar a navegação
+        setError('Usuário não autenticado. Redirecionando para login...');
+        setLoading(false);
+        return;
       }
 
       try {
@@ -63,7 +67,7 @@ export const CharactersPage = () => {
 
   const handleDelete = async (id) => {
     const currentUser = auth.currentUser;
-  
+
     // Adiciona a confirmação
     const confirmDelete = window.confirm("Tem certeza que deseja excluir este personagem?");
     
@@ -147,6 +151,21 @@ export const CharactersPage = () => {
     }));
   };
 
+  // Novo manipulador para seleção de avatar
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prevState => ({
+          ...prevState,
+          avatar: reader.result,  // Armazenar a imagem como base64
+        }));
+      };
+      reader.readAsDataURL(file);  // Converte a imagem em base64
+    }
+  };
+
   const handleDownloadPDF = (character) => {
     const doc = new jsPDF({
         orientation: 'portrait',
@@ -184,7 +203,10 @@ export const CharactersPage = () => {
 
     // Add Avatar (optional)
     if (character.avatar) {
-        doc.addImage(character.avatar, 'JPEG', margin, yPosition, 80, 80);
+        // Verifique se a imagem está em um formato suportado pelo jsPDF
+        // Aqui assumimos que está em base64 JPEG ou PNG
+        const imgType = character.avatar.substring("data:image/".length, character.avatar.indexOf(";base64"));
+        doc.addImage(character.avatar, imgType.toUpperCase(), margin, yPosition, 80, 80);
     } else {
         doc.setFillColor(200, 200, 200);
         doc.rect(margin, yPosition, 80, 80, 'F');
@@ -262,6 +284,10 @@ export const CharactersPage = () => {
   }
 
   if (error) {
+    // Redirecionamento para login se o usuário não estiver autenticado
+    if (error === 'Usuário não autenticado. Redirecionando para login...') {
+      return <Navigate to="/login" />;
+    }
     return <ErrorMessage>{error}</ErrorMessage>;
   }
 
@@ -331,6 +357,7 @@ export const CharactersPage = () => {
               value={formData.name}
               onChange={handleFormChange}
               placeholder="Nome"
+              required
             />
           </FormGroup>
 
@@ -344,6 +371,7 @@ export const CharactersPage = () => {
               value={formData.hitPoints}
               onChange={handleFormChange}
               placeholder="Pontos de Vida (HP)"
+              min="1"
             />
           </FormGroup>
 
@@ -357,6 +385,7 @@ export const CharactersPage = () => {
               value={formData.experience}
               onChange={handleFormChange}
               placeholder="Experiência"
+              min="0"
             />
           </FormGroup>
 
@@ -370,6 +399,7 @@ export const CharactersPage = () => {
               value={formData.class}
               onChange={handleFormChange}
               placeholder="Classe"
+              required
             />
           </FormGroup>
 
@@ -383,6 +413,8 @@ export const CharactersPage = () => {
               value={formData.level}
               onChange={handleFormChange}
               placeholder="Nível"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -396,6 +428,8 @@ export const CharactersPage = () => {
               value={formData.strength}
               onChange={handleFormChange}
               placeholder="Força"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -409,6 +443,8 @@ export const CharactersPage = () => {
               value={formData.dexterity}
               onChange={handleFormChange}
               placeholder="Destreza"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -422,6 +458,8 @@ export const CharactersPage = () => {
               value={formData.constitution}
               onChange={handleFormChange}
               placeholder="Constituição"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -435,6 +473,8 @@ export const CharactersPage = () => {
               value={formData.intelligence}
               onChange={handleFormChange}
               placeholder="Inteligência"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -448,6 +488,8 @@ export const CharactersPage = () => {
               value={formData.wisdom}
               onChange={handleFormChange}
               placeholder="Sabedoria"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -461,6 +503,8 @@ export const CharactersPage = () => {
               value={formData.charisma}
               onChange={handleFormChange}
               placeholder="Carisma"
+              min="1"
+              max="20"
             />
           </FormGroup>
 
@@ -500,16 +544,21 @@ export const CharactersPage = () => {
             />
           </FormGroup>
 
-          {/* URL do Avatar */}
+          {/* Novo campo para Avatar */}
           <FormGroup>
-            <Label htmlFor="avatar">URL do Avatar:</Label>
-            <Input
+            <Label htmlFor="avatar">Avatar:</Label>
+            <AvatarPreview>
+              {formData.avatar ? (
+                <img src={formData.avatar} alt="Avatar Prévia" />
+              ) : (
+                <span>Selecione uma imagem</span>
+              )}
+            </AvatarPreview>
+            <InputFile
               id="avatar"
-              type="text"
-              name="avatar"
-              value={formData.avatar}
-              onChange={handleFormChange}
-              placeholder="URL do Avatar"
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
             />
           </FormGroup>
 
@@ -535,6 +584,10 @@ const Container = styled.div`
   height: 100vh;
   color: #fff;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Title = styled.h1`
@@ -718,6 +771,28 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
     border-color: #e67e22;
+  }
+`;
+
+const InputFile = styled.input`
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #222;
+  color: #fff;
+`;
+
+const AvatarPreview = styled.div`
+  margin-bottom: 15px;
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  span {
+    color: #ccc;
   }
 `;
 
