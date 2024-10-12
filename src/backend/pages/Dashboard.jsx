@@ -128,9 +128,9 @@ export const Dashboard = () => {
           </AttributeCard>
         </AttributesBox>
 
-        {/* Botão Iniciar Missão */}
+        {/* Botão Mapa */}
         {!missionStarted && !isModalOpen && (
-          <Button primary onClick={startMission}>Iniciar Missão</Button>
+          <Button primary onClick={startMission}>Mapa</Button>
         )}
 
         {/* Modal de Mapa */}
