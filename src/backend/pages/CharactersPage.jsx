@@ -136,56 +136,112 @@ export const CharactersPage = () => {
   };
 
   const handleDownloadPDF = (character) => {
-    const doc = new jsPDF();
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'pt',
+      format: 'letter',
+    });
   
-    // Definir a fonte e o tamanho
+    const margin = 40;
+    let yPosition = margin;
+  
+    // Title Section
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text("Ficha do Personagem", 300, yPosition, { align: 'center' });
+    yPosition += 30;
+  
+    // Basic Info Section
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Nome:", margin, yPosition);
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(16);
+    doc.text(character.name, margin + 60, yPosition);
   
-    // Cabeçalho - Título
-    doc.setFontSize(22);
-    doc.text("Ficha de Personagem - D&D", 105, 20, null, null, 'center');
-    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Classe:", margin + 200, yPosition);
+    doc.setFont("helvetica", "normal");
+    doc.text(character.class, margin + 260, yPosition);
   
-    // Avatar no canto superior esquerdo
+    doc.setFont("helvetica", "bold");
+    doc.text("Nível:", margin + 360, yPosition);
+    doc.setFont("helvetica", "normal");
+    doc.text(String(character.level), margin + 410, yPosition);
+  
+    yPosition += 30;
+  
+    // Add Avatar (optional)
     if (character.avatar) {
-      doc.addImage(character.avatar, 'JPEG', 15, 30, 30, 30); // posição (15, 30) e tamanho (30x30)
+      doc.addImage(character.avatar, 'JPEG', margin, yPosition, 80, 80);
     } else {
-      doc.setTextColor(200, 200, 200); // Caso o avatar não exista, coloque uma cor de texto cinza
-      doc.text("Sem Avatar", 55, 45);
+      doc.setFillColor(200, 200, 200);
+      doc.rect(margin, yPosition, 80, 80, 'F');
+      doc.text("Sem Avatar", margin + 10, yPosition + 40);
     }
   
-    // Nome do Personagem
-    doc.setTextColor(0, 0, 0); // Cor preta
-    doc.text(`Nome: ${character.name}`, 55, 45);
+    yPosition += 100;
   
-    // Classe e Nível
-    doc.text(`Classe: ${character.class}`, 55, 55);
-    doc.text(`Nível: ${character.level}`, 55, 65);
+    // Attributes Section - Grid-like Structure
+    doc.setFont("helvetica", "bold");
+    doc.text("Atributos", margin, yPosition);
+    yPosition += 20;
   
-    // Atributos
-    doc.text("Atributos", 15, 85);
-    doc.setFontSize(12);
-    doc.text(`Força: ${character.strength}`, 15, 95);
-    doc.text(`Destreza: ${character.dexterity}`, 15, 105);
-    doc.text(`Constituição: ${character.constitution}`, 15, 115);
-    doc.text(`Inteligência: ${character.intelligence}`, 15, 125);
-    doc.text(`Sabedoria: ${character.wisdom}`, 15, 135);
-    doc.text(`Carisma: ${character.charisma}`, 15, 145);
+    const attributeXPositions = [margin, margin + 150, margin + 300]; // Create 3 columns for attributes
+    const attributeYPositions = [yPosition, yPosition + 20, yPosition + 40];
   
-    // Informações Adicionais
-    doc.setFontSize(14);
-    doc.text("Informações Adicionais", 15, 160);
-    doc.setFontSize(12);
-    doc.text(`Antecedente: ${character.background}`, 15, 170);
-    doc.text(`Equipamento: ${character.equipment}`, 15, 180);
-    doc.text(`Habilidades Especiais: ${character.specialAbilities}`, 15, 190);
-    
-    // HP e Experiência
-    doc.text(`Pontos de Vida (HP): ${character.hitPoints}`, 15, 200);
-    doc.text(`Experiência: ${character.experience}`, 15, 210);
+    const attributes = [
+      { label: 'Força', value: character.strength },
+      { label: 'Destreza', value: character.dexterity },
+      { label: 'Constituição', value: character.constitution },
+      { label: 'Inteligência', value: character.intelligence },
+      { label: 'Sabedoria', value: character.wisdom },
+      { label: 'Carisma', value: character.charisma },
+    ];
   
-    // Salvar o PDF
+    attributes.forEach((attr, index) => {
+      const col = index % 3;
+      const row = Math.floor(index / 3);
+      const xPos = attributeXPositions[col];
+      const yPos = attributeYPositions[row];
+  
+      doc.text(`${attr.label}: ${attr.value}`, xPos, yPos);
+    });
+  
+    yPosition += 60;
+  
+    // HP and Experience Section
+    doc.setFont("helvetica", "bold");
+    doc.text("HP:", margin, yPosition);
+    doc.setFont("helvetica", "normal");
+    doc.text(String(character.hitPoints), margin + 30, yPosition);
+  
+    doc.setFont("helvetica", "bold");
+    doc.text("Experiência:", margin + 100, yPosition);
+    doc.setFont("helvetica", "normal");
+    doc.text(String(character.experience), margin + 160, yPosition);
+  
+    yPosition += 30;
+  
+    // Additional Information - Skills and Abilities
+    doc.setFont("helvetica", "bold");
+    doc.text("Informações Adicionais", margin, yPosition);
+    yPosition += 20;
+  
+    const infoSections = [
+      { label: "Antecedente", content: character.background },
+      { label: "Equipamento", content: character.equipment },
+      { label: "Habilidades Especiais", content: character.specialAbilities }
+    ];
+  
+    infoSections.forEach(section => {
+      doc.setFont("helvetica", "bold");
+      doc.text(`${section.label}:`, margin, yPosition);
+      doc.setFont("helvetica", "normal");
+      doc.text(section.content || "N/A", margin + 100, yPosition, { maxWidth: 450 });
+      yPosition += 40;
+    });
+  
+    // Save the PDF
     doc.save(`${character.name}-ficha-dnd.pdf`);
   };
   
