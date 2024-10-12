@@ -6,7 +6,7 @@ Embarque em suas aventuras de Dungeons & Dragons com o Emporium do Jogador e des
 ## 🔥 Introdução
 JavaScript na webpage, Banco de dados no Firebase com Auth + FireStore.
 
-[Acessar site](https://emporiumdojogador.vercel.app/)
+[Acessar site](https://www.emporiumdojogador.online/)
 
 ## 📦 Tecnologias usadas:
 
