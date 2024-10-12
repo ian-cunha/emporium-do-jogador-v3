@@ -337,7 +337,7 @@ export const CharactersPage = () => {
                 <ActionButton onClick={() => handleEditCharacter(character)}>Editar</ActionButton>
                 <ActionButton onClick={() => handleDelete(character.id)}>Excluir</ActionButton>
                 <ActionButton onClick={() => handleShare(character)}>Compartilhar</ActionButton>
-                <ActionButton onClick={() => handleDownloadPDF(character)}>Baixar PDF</ActionButton>
+                <ActionButton onClick={() => handleDownloadPDF(character)}>Baixar</ActionButton>
               </Actions>
             </CharacterCard>
           ))}
