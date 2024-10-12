@@ -11,7 +11,7 @@ export const CharactersPage = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedCharacter, setSelectedCharacter] = useState(null); // Para editar os dados do personagem
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     class: '',
@@ -25,6 +25,7 @@ export const CharactersPage = () => {
     background: '',
     equipment: '',
     specialAbilities: '',
+    avatar: '', // Para o avatar
   });
 
   // Carregar os personagens do usuário
@@ -123,6 +124,7 @@ export const CharactersPage = () => {
       background: character.background,
       equipment: character.equipment,
       specialAbilities: character.specialAbilities,
+      avatar: character.avatar || '',  // Caso o avatar seja uma URL
     });
   };
 
@@ -153,24 +155,35 @@ export const CharactersPage = () => {
         <CharacterList>
           {characters.map((character) => (
             <CharacterCard key={character.id}>
+              <Avatar src={character.avatar || 'https://via.placeholder.com/150'} alt="Avatar" />
               <CharacterName>{character.name}</CharacterName>
               <CharacterClass>Classe: {character.class}</CharacterClass>
               <CharacterLevel>Nível: {character.level}</CharacterLevel>
               
               {/* Exibindo todos os atributos e outras informações do personagem */}
-              <CharacterAttributes>
-                <strong>Atributos:</strong>
-                <div>Força: {character.strength}</div>
-                <div>Destreza: {character.dexterity}</div>
-                <div>Constituição: {character.constitution}</div>
-                <div>Inteligência: {character.intelligence}</div>
-                <div>Sabedoria: {character.wisdom}</div>
-                <div>Carisma: {character.charisma}</div>
-                <strong>Informações Adicionais:</strong>
-                <div>Antecedente: {character.background}</div>
-                <div>Equipamento: {character.equipment}</div>
-                <div>Habilidades Especiais: {character.specialAbilities}</div>
-              </CharacterAttributes>
+              <AttributesSection>
+                <AttributeList>
+                  <AttributeTitle>Atributos</AttributeTitle>
+                  <AttributeRow>
+                    <div>Força: {character.strength}</div>
+                    <div>Destreza: {character.dexterity}</div>
+                  </AttributeRow>
+                  <AttributeRow>
+                    <div>Constituição: {character.constitution}</div>
+                    <div>Inteligência: {character.intelligence}</div>
+                  </AttributeRow>
+                  <AttributeRow>
+                    <div>Sabedoria: {character.wisdom}</div>
+                    <div>Carisma: {character.charisma}</div>
+                  </AttributeRow>
+                </AttributeList>
+                <InfoSection>
+                  <InfoTitle>Informações Adicionais</InfoTitle>
+                  <div>Antecedente: {character.background}</div>
+                  <div>Equipamento: {character.equipment}</div>
+                  <div>Habilidades Especiais: {character.specialAbilities}</div>
+                </InfoSection>
+              </AttributesSection>
 
               <Actions>
                 <ActionButton onClick={() => handleEditCharacter(character)}>Editar</ActionButton>
@@ -268,6 +281,13 @@ export const CharactersPage = () => {
             onChange={handleFormChange}
             placeholder="Habilidades Especiais"
           />
+          <Input
+            type="text"
+            name="avatar"
+            value={formData.avatar}
+            onChange={handleFormChange}
+            placeholder="URL do Avatar"
+          />
           
           <Button onClick={() => handleUpdate(selectedCharacter.id, formData)}>Salvar Alterações</Button>
           <Button onClick={() => setSelectedCharacter(null)}>Cancelar</Button>
@@ -284,9 +304,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  background-color: #000; /* Fundo preto */
+  background-color: #000;
   height: 100vh;
-  color: #fff; /* Texto branco */
+  color: #fff;
 `;
 
 const Title = styled.h1`
@@ -318,16 +338,27 @@ const CharacterList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
 `;
 
 const CharacterCard = styled.div`
   background-color: #222;
   padding: 20px;
-  width: 250px;
+  width: 350px;
+  height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+`;
+
+const Avatar = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #e67e22;
 `;
 
 const CharacterName = styled.h2`
@@ -345,15 +376,35 @@ const CharacterLevel = styled.p`
   color: #ccc;
 `;
 
-const CharacterAttributes = styled.div`
-  font-size: 14px;
-  color: #bbb;
-  margin-top: 10px;
+const AttributesSection = styled.div`
+  margin-top: 15px;
   text-align: left;
+`;
 
-  div {
-    margin-bottom: 5px;
-  }
+const AttributeList = styled.div`
+  margin-bottom: 15px;
+`;
+
+const AttributeTitle = styled.h3`
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #e67e22;
+`;
+
+const AttributeRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+const InfoSection = styled.div`
+  margin-top: 20px;
+`;
+
+const InfoTitle = styled.h3`
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #e67e22;
 `;
 
 const Actions = styled.div`
