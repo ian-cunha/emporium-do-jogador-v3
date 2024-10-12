@@ -374,9 +374,14 @@ margin: 0 5px;
 `
 
 export const Title = styled.h1`
-margin: 10px 24px;
+margin: 20px 24px;
 text-align: center;
 font-size: 1.8em;
+
+  @media (max-width: 768px) {
+    margin-top: 30px;
+    font-size: 30px;
+  }
 `
 
 export const SubTitle = styled.p`

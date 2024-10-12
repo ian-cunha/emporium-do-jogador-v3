@@ -329,6 +329,11 @@ const Title = styled.h1`
   margin-bottom: 30px;
   color: #fff;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+    font-size: 30px;
+  }
 `;
 
 const Form = styled.form`

@@ -586,15 +586,20 @@ const Container = styled.div`
   overflow-y: auto;
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 0px;
   }
 `;
 
 const Title = styled.h1`
   font-size: 36px;
   margin-bottom: 30px;
-  margin-top: 40px;
+  margin-top: 60px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+    font-size: 30px;
+  }
 `;
 
 const LoadingMessage = styled.p`
@@ -635,7 +640,7 @@ const CharacterCard = styled.div`
   position: relative;
 
   @media (max-width: 768px) {
-    width: 95vw;
+    width: 90vw;
   }
 `;
 
