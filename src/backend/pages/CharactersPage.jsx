@@ -387,7 +387,8 @@ const CharacterList = styled.div`
 const CharacterCard = styled.div`
   background-color: #222;
   padding: 20px;
-  width: 350px;
+  width: 500px;
+  margin-bottom: 20px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
