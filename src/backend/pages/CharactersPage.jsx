@@ -76,7 +76,10 @@ export const CharactersPage = () => {
     const currentUser = auth.currentUser;
     try {
       const characterRef = doc(db, 'users', currentUser.email, 'characters', id);
-      await updateDoc(characterRef, updatedData);
+      await updateDoc(characterRef, {
+        ...updatedData,
+        equipment: updatedData.equipment.split(',').map(item => item.trim()) // Converte de volta para array
+      });
       setCharacters(prevState =>
         prevState.map(character =>
           character.id === id ? { ...character, ...updatedData } : character
@@ -86,7 +89,7 @@ export const CharactersPage = () => {
     } catch (err) {
       console.error("Erro ao atualizar personagem:", err);
     }
-  };
+  };  
 
   const handleShare = (character) => {
     const characterInfo = `
@@ -121,11 +124,14 @@ export const CharactersPage = () => {
       wisdom: character.wisdom,
       charisma: character.charisma,
       background: character.background,
-      equipment: character.equipment,
+      equipment: Array.isArray(character.equipment) ? character.equipment.join(', ') : character.equipment, // Converte para string
       specialAbilities: character.specialAbilities,
       avatar: character.avatar || '',
+      hitPoints: character.hitPoints || 10,
+      experience: character.experience || 0,
     });
   };
+  
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;

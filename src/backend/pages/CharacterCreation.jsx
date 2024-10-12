@@ -54,24 +54,25 @@ export const CharacterCreation = () => {
   // Função para enviar os dados e salvar o personagem no Firestore
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const currentUser = auth.currentUser;  // Obter o usuário autenticado
     if (!currentUser) {
       alert('Você precisa estar logado para criar um personagem.');
       return;
     }
-
+  
     try {
       // Criar o documento de personagem dentro da coleção 'characters' do usuário
       await setDoc(doc(db, 'users', currentUser.email, 'characters', character.name), {
         ...character,
         createdAt: new Date(),
         userId: currentUser.uid,  // Adiciona o ID do usuário para referência
+        equipment: character.equipment ? character.equipment.split(',').map(item => item.trim()) : [], // Converte a string em um array
       });
-
+  
       console.log('Personagem criado com sucesso');
       alert('Seu personagem foi criado com sucesso!');
-
+  
       // Limpar o formulário após sucesso
       setCharacter({
         name: '',
@@ -85,7 +86,7 @@ export const CharacterCreation = () => {
         wisdom: 10,
         charisma: 10,
         background: '',
-        equipment: '',
+        equipment: '',  // Limpa o campo de equipamento ao criar um novo personagem
         experience: 0,
         personalityTraits: '',
         specialAbilities: '',
@@ -97,6 +98,7 @@ export const CharacterCreation = () => {
       alert('Ocorreu um erro ao salvar seu personagem. Tente novamente.');
     }
   };
+  
 
   return (
     <Container>

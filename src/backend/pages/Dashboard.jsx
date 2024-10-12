@@ -8,13 +8,12 @@ import { getFirestore, collection, getDocs, query, where } from 'firebase/firest
 const db = getFirestore();
 
 export const Dashboard = () => {
-  const [playerStats, setPlayerStats] = useState(null); // Inicializando com null
+  const [playerStats, setPlayerStats] = useState(null);
   const [playerPosition, setPlayerPosition] = useState({ x: 5, y: 5 });
   const [missionStarted, setMissionStarted] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Para controlar o modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const currentUser = auth.currentUser;
 
-  // Função para buscar dados do personagem principal
   const fetchMainCharacter = async () => {
     if (currentUser) {
       try {
@@ -24,10 +23,11 @@ export const Dashboard = () => {
         );
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
-          const mainCharacter = querySnapshot.docs[0].data(); // Supondo que só tenha um personagem principal
-          setPlayerStats(mainCharacter); // Atualiza os stats com o personagem principal
+          const mainCharacter = querySnapshot.docs[0].data();
+          // Garantir que equipment seja um array
+          setPlayerStats({ ...mainCharacter, equipment: mainCharacter.equipment || [] });
         } else {
-          setPlayerStats(null); // Caso não haja personagem principal
+          setPlayerStats(null);
         }
       } catch (error) {
         console.error('Erro ao buscar personagem principal:', error);
@@ -37,11 +37,11 @@ export const Dashboard = () => {
 
   useEffect(() => {
     fetchMainCharacter();
-  }, [currentUser]); // Executa apenas quando o usuário estiver autenticado
+  }, [currentUser]);
 
   const startMission = () => {
     setMissionStarted(true);
-    setIsModalOpen(true); // Abre o modal quando a missão começa
+    setIsModalOpen(true);
   };
 
   const movePlayer = (direction) => {
@@ -60,10 +60,9 @@ export const Dashboard = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setMissionStarted(false); // A missão não está mais iniciada quando fecha o modal
+    setMissionStarted(false);
   };
 
-  // Se não há personagem principal, exibe uma mensagem de "sem dados"
   if (playerStats === null) {
     return (
       <ViewPlatform>
@@ -94,8 +93,8 @@ export const Dashboard = () => {
             <p>{playerStats.experience} XP</p>
           </Card>
           <Card>
-            <h3>Missões Completas</h3>
-            <p>{playerStats.completedQuests || 0}</p>
+            <h3>Equipamentos</h3>
+            <p>{Array.isArray(playerStats.equipment) && playerStats.equipment.length > 0 ? playerStats.equipment.join(', ') : 'Nenhum equipamento'}</p>
           </Card>
         </StatsBox>
 
@@ -299,7 +298,7 @@ const CloseButton = styled.button`
   height: 30px;
   font-size: 1em;
   cursor: pointer;
-  
+
   &:hover {
     background-color: #d45d00;
   }

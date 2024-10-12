@@ -21,12 +21,12 @@ export const Settings = () => {
     wisdom: 10,
     charisma: 10,
     background: '',
-    equipment: '',
+    equipment: [], // Certifique-se de que isso é um array
     avatar: '',
-    hitPoints: 10,  // Novo campo de HP
-    experience: 0,  // Novo campo de Experiência
+    hitPoints: 10,
+    experience: 0,
   });
-  const [showModal, setShowModal] = useState(false); // Controla a exibição do modal de troca de personagem
+  const [showModal, setShowModal] = useState(false);
   const currentUser = auth.currentUser;
 
   useEffect(() => {
@@ -43,7 +43,10 @@ export const Settings = () => {
         const mainCharacter = characterList.find((char) => char.isMain);
         if (mainCharacter) {
           setSelectedCharacter(mainCharacter);
-          setCharacterData(mainCharacter); // Carregar dados do personagem principal
+          setCharacterData({
+            ...mainCharacter,
+            equipment: Array.isArray(mainCharacter.equipment) ? mainCharacter.equipment : [], // Garantir que equipment é um array
+          });
         }
       };
       fetchCharacters();
@@ -52,7 +55,10 @@ export const Settings = () => {
 
   useEffect(() => {
     if (selectedCharacter) {
-      setCharacterData(selectedCharacter); // Atualiza os dados do personagem selecionado
+      setCharacterData({
+        ...selectedCharacter,
+        equipment: Array.isArray(selectedCharacter.equipment) ? selectedCharacter.equipment : [], // Verifique novamente aqui
+      });
     }
   }, [selectedCharacter]);
 
@@ -84,7 +90,7 @@ export const Settings = () => {
 
       await setDoc(doc(db, 'users', currentUser.email, 'characters', selectedCharacter.id), {
         ...characterData,
-        isMain: true,  // Adiciona um campo para marcar como principal
+        isMain: true,
       });
 
       alert('Personagem atualizado com sucesso!');
@@ -274,12 +280,17 @@ export const Settings = () => {
             <Label>Equipamentos:</Label>
             <TextArea
               name="equipment"
-              value={characterData.equipment}
-              onChange={handleInputChange}
+              value={Array.isArray(characterData.equipment) ? characterData.equipment.join(', ') : ''} // Verifique se equipment é um array
+              onChange={(e) => {
+                const equipmentArray = e.target.value.split(',').map(item => item.trim());
+                setCharacterData((prevState) => ({
+                  ...prevState,
+                  equipment: equipmentArray,
+                }));
+              }}
               placeholder="Equipamentos"
             />
 
-            {/* Campos de HP e Experiência */}
             <Label>Pontos de Vida (HP):</Label>
             <Input
               type="number"
