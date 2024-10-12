@@ -203,7 +203,7 @@ export const CharacterCreation = () => {
         <h3>Atributos</h3>
         <Attributes>
           <Attribute>
-            <Label>Força:</Label>
+            <Label>Força: </Label>
             <Input
               type="number"
               name="strength"
@@ -214,7 +214,7 @@ export const CharacterCreation = () => {
             />
           </Attribute>
           <Attribute>
-            <Label>Destreza:</Label>
+            <Label>Destreza: </Label>
             <Input
               type="number"
               name="dexterity"
@@ -225,7 +225,7 @@ export const CharacterCreation = () => {
             />
           </Attribute>
           <Attribute>
-            <Label>Constituição:</Label>
+            <Label>Constituição: </Label>
             <Input
               type="number"
               name="constitution"
@@ -236,7 +236,7 @@ export const CharacterCreation = () => {
             />
           </Attribute>
           <Attribute>
-            <Label>Inteligência:</Label>
+            <Label>Inteligência: </Label>
             <Input
               type="number"
               name="intelligence"
@@ -247,7 +247,7 @@ export const CharacterCreation = () => {
             />
           </Attribute>
           <Attribute>
-            <Label>Sabedoria:</Label>
+            <Label>Sabedoria: </Label>
             <Input
               type="number"
               name="wisdom"
@@ -258,7 +258,7 @@ export const CharacterCreation = () => {
             />
           </Attribute>
           <Attribute>
-            <Label>Carisma:</Label>
+            <Label>Carisma: </Label>
             <Input
               type="number"
               name="charisma"
@@ -389,6 +389,9 @@ const Attributes = styled.div`
 
 const Attribute = styled.div`
   width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const AvatarPreview = styled.div`
