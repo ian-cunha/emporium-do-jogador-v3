@@ -317,6 +317,10 @@ const Container = styled.div`
   background-color: #000;
   height: 100vh;
   color: #fff;
+
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
 `;
 
 const Title = styled.h1`

@@ -350,6 +350,10 @@ const Container = styled.div`
   height: 100vh;
   color: #fff;
   justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
 `;
 
 const Title = styled.h1`
