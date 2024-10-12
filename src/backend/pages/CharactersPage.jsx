@@ -31,7 +31,6 @@ export const CharactersPage = () => {
     experience: 0,  // Novo campo para Experiência
   });
 
-
   useEffect(() => {
     const fetchCharacters = async () => {
       const currentUser = auth.currentUser;
@@ -139,7 +138,6 @@ export const CharactersPage = () => {
       experience: character.experience || 0,
     });
   };
-  
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -257,7 +255,7 @@ export const CharactersPage = () => {
 
     // Save the PDF
     doc.save(`${character.name}-ficha-dnd.pdf`);
-};
+  };
 
   if (loading) {
     return <LoadingMessage>Carregando personagens...</LoadingMessage>;
@@ -323,112 +321,203 @@ export const CharactersPage = () => {
       {selectedCharacter && (
         <UpdateForm>
           <h2>Editar Personagem</h2>
-          <Input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleFormChange}
-            placeholder="Nome"
-          />
-          <Input
-            type="number"
-            name="hitPoints"
-            value={formData.hitPoints}
-            onChange={handleFormChange}
-            placeholder="Pontos de Vida (HP)"
-          />
-          <Input
-            type="number"
-            name="experience"
-            value={formData.experience}
-            onChange={handleFormChange}
-            placeholder="Experiência"
-          />
+          {/* Nome */}
+          <FormGroup>
+            <Label htmlFor="name">Nome:</Label>
+            <Input
+              id="name"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleFormChange}
+              placeholder="Nome"
+            />
+          </FormGroup>
 
-          <Input
-            type="text"
-            name="class"
-            value={formData.class}
-            onChange={handleFormChange}
-            placeholder="Classe"
-          />
-          <Input
-            type="number"
-            name="level"
-            value={formData.level}
-            onChange={handleFormChange}
-            placeholder="Nível"
-          />
-          <Input
-            type="number"
-            name="strength"
-            value={formData.strength}
-            onChange={handleFormChange}
-            placeholder="Força"
-          />
-          <Input
-            type="number"
-            name="dexterity"
-            value={formData.dexterity}
-            onChange={handleFormChange}
-            placeholder="Destreza"
-          />
-          <Input
-            type="number"
-            name="constitution"
-            value={formData.constitution}
-            onChange={handleFormChange}
-            placeholder="Constituição"
-          />
-          <Input
-            type="number"
-            name="intelligence"
-            value={formData.intelligence}
-            onChange={handleFormChange}
-            placeholder="Inteligência"
-          />
-          <Input
-            type="number"
-            name="wisdom"
-            value={formData.wisdom}
-            onChange={handleFormChange}
-            placeholder="Sabedoria"
-          />
-          <Input
-            type="number"
-            name="charisma"
-            value={formData.charisma}
-            onChange={handleFormChange}
-            placeholder="Carisma"
-          />
-          <Textarea
-            name="background"
-            value={formData.background}
-            onChange={handleFormChange}
-            placeholder="Antecedente"
-          />
-          <Textarea
-            name="equipment"
-            value={formData.equipment}
-            onChange={handleFormChange}
-            placeholder="Equipamento"
-          />
-          <Textarea
-            name="specialAbilities"
-            value={formData.specialAbilities}
-            onChange={handleFormChange}
-            placeholder="Habilidades Especiais"
-          />
-          <Input
-            type="text"
-            name="avatar"
-            value={formData.avatar}
-            onChange={handleFormChange}
-            placeholder="URL do Avatar"
-          />
+          {/* Pontos de Vida (HP) */}
+          <FormGroup>
+            <Label htmlFor="hitPoints">Pontos de Vida (HP):</Label>
+            <Input
+              id="hitPoints"
+              type="number"
+              name="hitPoints"
+              value={formData.hitPoints}
+              onChange={handleFormChange}
+              placeholder="Pontos de Vida (HP)"
+            />
+          </FormGroup>
 
-          <Button onClick={() => handleUpdate(selectedCharacter.id, formData)}>Salvar Alterações</Button>
-          <Button onClick={() => setSelectedCharacter(null)}>Cancelar</Button>
+          {/* Experiência */}
+          <FormGroup>
+            <Label htmlFor="experience">Experiência:</Label>
+            <Input
+              id="experience"
+              type="number"
+              name="experience"
+              value={formData.experience}
+              onChange={handleFormChange}
+              placeholder="Experiência"
+            />
+          </FormGroup>
+
+          {/* Classe */}
+          <FormGroup>
+            <Label htmlFor="class">Classe:</Label>
+            <Input
+              id="class"
+              type="text"
+              name="class"
+              value={formData.class}
+              onChange={handleFormChange}
+              placeholder="Classe"
+            />
+          </FormGroup>
+
+          {/* Nível */}
+          <FormGroup>
+            <Label htmlFor="level">Nível:</Label>
+            <Input
+              id="level"
+              type="number"
+              name="level"
+              value={formData.level}
+              onChange={handleFormChange}
+              placeholder="Nível"
+            />
+          </FormGroup>
+
+          {/* Força */}
+          <FormGroup>
+            <Label htmlFor="strength">Força:</Label>
+            <Input
+              id="strength"
+              type="number"
+              name="strength"
+              value={formData.strength}
+              onChange={handleFormChange}
+              placeholder="Força"
+            />
+          </FormGroup>
+
+          {/* Destreza */}
+          <FormGroup>
+            <Label htmlFor="dexterity">Destreza:</Label>
+            <Input
+              id="dexterity"
+              type="number"
+              name="dexterity"
+              value={formData.dexterity}
+              onChange={handleFormChange}
+              placeholder="Destreza"
+            />
+          </FormGroup>
+
+          {/* Constituição */}
+          <FormGroup>
+            <Label htmlFor="constitution">Constituição:</Label>
+            <Input
+              id="constitution"
+              type="number"
+              name="constitution"
+              value={formData.constitution}
+              onChange={handleFormChange}
+              placeholder="Constituição"
+            />
+          </FormGroup>
+
+          {/* Inteligência */}
+          <FormGroup>
+            <Label htmlFor="intelligence">Inteligência:</Label>
+            <Input
+              id="intelligence"
+              type="number"
+              name="intelligence"
+              value={formData.intelligence}
+              onChange={handleFormChange}
+              placeholder="Inteligência"
+            />
+          </FormGroup>
+
+          {/* Sabedoria */}
+          <FormGroup>
+            <Label htmlFor="wisdom">Sabedoria:</Label>
+            <Input
+              id="wisdom"
+              type="number"
+              name="wisdom"
+              value={formData.wisdom}
+              onChange={handleFormChange}
+              placeholder="Sabedoria"
+            />
+          </FormGroup>
+
+          {/* Carisma */}
+          <FormGroup>
+            <Label htmlFor="charisma">Carisma:</Label>
+            <Input
+              id="charisma"
+              type="number"
+              name="charisma"
+              value={formData.charisma}
+              onChange={handleFormChange}
+              placeholder="Carisma"
+            />
+          </FormGroup>
+
+          {/* Antecedente */}
+          <FormGroup>
+            <Label htmlFor="background">Antecedente:</Label>
+            <Textarea
+              id="background"
+              name="background"
+              value={formData.background}
+              onChange={handleFormChange}
+              placeholder="Antecedente"
+            />
+          </FormGroup>
+
+          {/* Equipamento */}
+          <FormGroup>
+            <Label htmlFor="equipment">Equipamento:</Label>
+            <Textarea
+              id="equipment"
+              name="equipment"
+              value={formData.equipment}
+              onChange={handleFormChange}
+              placeholder="Equipamento"
+            />
+          </FormGroup>
+
+          {/* Habilidades Especiais */}
+          <FormGroup>
+            <Label htmlFor="specialAbilities">Habilidades Especiais:</Label>
+            <Textarea
+              id="specialAbilities"
+              name="specialAbilities"
+              value={formData.specialAbilities}
+              onChange={handleFormChange}
+              placeholder="Habilidades Especiais"
+            />
+          </FormGroup>
+
+          {/* URL do Avatar */}
+          <FormGroup>
+            <Label htmlFor="avatar">URL do Avatar:</Label>
+            <Input
+              id="avatar"
+              type="text"
+              name="avatar"
+              value={formData.avatar}
+              onChange={handleFormChange}
+              placeholder="URL do Avatar"
+            />
+          </FormGroup>
+
+          {/* Botões de Ação */}
+          <ButtonGroup>
+            <Button onClick={() => handleUpdate(selectedCharacter.id, formData)}>Salvar Alterações</Button>
+            <Button onClick={() => setSelectedCharacter(null)}>Cancelar</Button>
+          </ButtonGroup>
         </UpdateForm>
       )}
     </Container>
@@ -445,6 +534,7 @@ const Container = styled.div`
   background-color: #000;
   height: 100vh;
   color: #fff;
+  overflow-y: auto;
 `;
 
 const Title = styled.h1`
@@ -574,13 +664,30 @@ const ActionButton = styled.button`
   }
 `;
 
+// Novos estilos para o formulário de atualização
+
 const UpdateForm = styled.div`
   background-color: #333;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 500px;
+  width: 90%;
   margin: 20px auto;
   text-align: center;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  width: 100%;
+`;
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #e67e22;
 `;
 
 const Input = styled.input`
@@ -588,10 +695,14 @@ const Input = styled.input`
   font-size: 16px;
   border: 1px solid #333;
   border-radius: 8px;
-  margin-bottom: 15px;
   width: 100%;
   background-color: #222;
   color: white;
+
+  &:focus {
+    outline: none;
+    border-color: #e67e22;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -599,11 +710,21 @@ const Textarea = styled.textarea`
   font-size: 16px;
   border: 1px solid #333;
   border-radius: 8px;
-  margin-bottom: 15px;
   width: 100%;
   min-height: 80px;
   background-color: #222;
   color: white;
+
+  &:focus {
+    outline: none;
+    border-color: #e67e22;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 `;
 
 const Button = styled.button`
