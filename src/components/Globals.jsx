@@ -99,6 +99,7 @@ height: 100vh;
 @media (max-width: 768px) {
   width: 100%;
   height: auto;
+  margin: auto;
   }
 `
 
@@ -126,9 +127,9 @@ export const FlexBox = styled.div`
   width: 100vw;
   overflow-x: hidden;
   @media (max-width: 768px) {
-    margin-top: 0;
-    padding-top: 160px;
-    padding-bottom: 60px;
+    margin-top: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 `
 
