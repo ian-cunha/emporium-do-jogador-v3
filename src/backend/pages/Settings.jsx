@@ -184,6 +184,7 @@ export const Settings = () => {
               value={characterData.race}
               onChange={handleInputChange}
               placeholder="Raça"
+              disabled
             />
 
             <Label>Classe:</Label>
@@ -193,6 +194,7 @@ export const Settings = () => {
               value={characterData.class}
               onChange={handleInputChange}
               placeholder="Classe"
+              disabled
             />
 
             <Label>Nível:</Label>
@@ -264,6 +266,7 @@ export const Settings = () => {
               value={characterData.background}
               onChange={handleInputChange}
               placeholder="Histórico"
+              disabled
             />
 
             <Label>Equipamentos:</Label>
