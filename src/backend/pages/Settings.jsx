@@ -354,7 +354,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 36px;
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 30px;
   text-align: center;
 `;

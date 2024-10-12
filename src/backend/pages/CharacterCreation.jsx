@@ -103,7 +103,7 @@ export const CharacterCreation = () => {
   return (
     <Container>
       <InsideBar />
-      <Title>Criar Ficha de Personagem</Title>
+      <Title>Ficha de Personagem</Title>
       <Form onSubmit={handleSubmit}>
         <Label>Nome do Personagem:</Label>
         <Input
@@ -321,9 +321,10 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 36px;
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 30px;
   color: #fff;
+  text-align: center;
 `;
 
 const Form = styled.form`
