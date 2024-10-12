@@ -30,7 +30,7 @@ export const CharactersPage = () => {
     hitPoints: 10,  // Novo campo para HP
     experience: 0,  // Novo campo para Experiência
   });
-  
+
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -82,12 +82,12 @@ export const CharactersPage = () => {
           character.id === id ? { ...character, ...updatedData } : character
         )
       );
-      setSelectedCharacter(null); 
+      setSelectedCharacter(null);
     } catch (err) {
       console.error("Erro ao atualizar personagem:", err);
     }
   };
-  
+
   const handleShare = (character) => {
     const characterInfo = `
       Nome: ${character.name}
@@ -123,7 +123,7 @@ export const CharactersPage = () => {
       background: character.background,
       equipment: character.equipment,
       specialAbilities: character.specialAbilities,
-      avatar: character.avatar || '', 
+      avatar: character.avatar || '',
     });
   };
 
@@ -141,35 +141,35 @@ export const CharactersPage = () => {
       unit: 'pt',
       format: 'letter',
     });
-  
+
     const margin = 40;
     let yPosition = margin;
-  
+
     // Title Section
     doc.setFontSize(20);
     doc.setFont("helvetica", "bold");
     doc.text("Ficha do Personagem", 300, yPosition, { align: 'center' });
     yPosition += 30;
-  
+
     // Basic Info Section
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text("Nome:", margin, yPosition);
     doc.setFont("helvetica", "normal");
     doc.text(character.name, margin + 60, yPosition);
-  
+
     doc.setFont("helvetica", "bold");
     doc.text("Classe:", margin + 200, yPosition);
     doc.setFont("helvetica", "normal");
     doc.text(character.class, margin + 260, yPosition);
-  
+
     doc.setFont("helvetica", "bold");
     doc.text("Nível:", margin + 360, yPosition);
     doc.setFont("helvetica", "normal");
     doc.text(String(character.level), margin + 410, yPosition);
-  
+
     yPosition += 30;
-  
+
     // Add Avatar (optional)
     if (character.avatar) {
       doc.addImage(character.avatar, 'JPEG', margin, yPosition, 80, 80);
@@ -178,17 +178,17 @@ export const CharactersPage = () => {
       doc.rect(margin, yPosition, 80, 80, 'F');
       doc.text("Sem Avatar", margin + 10, yPosition + 40);
     }
-  
+
     yPosition += 100;
-  
+
     // Attributes Section - Grid-like Structure
     doc.setFont("helvetica", "bold");
     doc.text("Atributos", margin, yPosition);
     yPosition += 20;
-  
+
     const attributeXPositions = [margin, margin + 150, margin + 300]; // Create 3 columns for attributes
     const attributeYPositions = [yPosition, yPosition + 20, yPosition + 40];
-  
+
     const attributes = [
       { label: 'Força', value: character.strength },
       { label: 'Destreza', value: character.dexterity },
@@ -197,42 +197,42 @@ export const CharactersPage = () => {
       { label: 'Sabedoria', value: character.wisdom },
       { label: 'Carisma', value: character.charisma },
     ];
-  
+
     attributes.forEach((attr, index) => {
       const col = index % 3;
       const row = Math.floor(index / 3);
       const xPos = attributeXPositions[col];
       const yPos = attributeYPositions[row];
-  
+
       doc.text(`${attr.label}: ${attr.value}`, xPos, yPos);
     });
-  
+
     yPosition += 60;
-  
+
     // HP and Experience Section
     doc.setFont("helvetica", "bold");
     doc.text("HP:", margin, yPosition);
     doc.setFont("helvetica", "normal");
     doc.text(String(character.hitPoints), margin + 30, yPosition);
-  
+
     doc.setFont("helvetica", "bold");
     doc.text("Experiência:", margin + 100, yPosition);
     doc.setFont("helvetica", "normal");
     doc.text(String(character.experience), margin + 160, yPosition);
-  
+
     yPosition += 30;
-  
+
     // Additional Information - Skills and Abilities
     doc.setFont("helvetica", "bold");
     doc.text("Informações Adicionais", margin, yPosition);
     yPosition += 20;
-  
+
     const infoSections = [
       { label: "Antecedente", content: character.background },
       { label: "Equipamento", content: character.equipment },
       { label: "Habilidades Especiais", content: character.specialAbilities }
     ];
-  
+
     infoSections.forEach(section => {
       doc.setFont("helvetica", "bold");
       doc.text(`${section.label}:`, margin, yPosition);
@@ -240,11 +240,11 @@ export const CharactersPage = () => {
       doc.text(section.content || "N/A", margin + 100, yPosition, { maxWidth: 450 });
       yPosition += 40;
     });
-  
+
     // Save the PDF
     doc.save(`${character.name}-ficha-dnd.pdf`);
   };
-  
+
 
   if (loading) {
     return <LoadingMessage>Carregando personagens...</LoadingMessage>;
@@ -268,10 +268,10 @@ export const CharactersPage = () => {
               <CharacterName>{character.name}</CharacterName>
               <CharacterClass>Classe: {character.class}</CharacterClass>
               <CharacterLevel>Nível: {character.level}</CharacterLevel>
-                  {/* Exibindo HP e Experiência */}
-    <div>Pontos de Vida (HP): {character.hitPoints}</div>
-    <div>Experiência: {character.experience}</div>
-              
+              {/* Exibindo HP e Experiência */}
+              <div>Pontos de Vida (HP): {character.hitPoints}</div>
+              <div>Experiência: {character.experience}</div>
+
               <AttributesSection>
                 <AttributeList>
                   <AttributeTitle>Atributos</AttributeTitle>
@@ -318,19 +318,19 @@ export const CharactersPage = () => {
             placeholder="Nome"
           />
           <Input
-  type="number"
-  name="hitPoints"
-  value={formData.hitPoints}
-  onChange={handleFormChange}
-  placeholder="Pontos de Vida (HP)"
-/>
-<Input
-  type="number"
-  name="experience"
-  value={formData.experience}
-  onChange={handleFormChange}
-  placeholder="Experiência"
-/>
+            type="number"
+            name="hitPoints"
+            value={formData.hitPoints}
+            onChange={handleFormChange}
+            placeholder="Pontos de Vida (HP)"
+          />
+          <Input
+            type="number"
+            name="experience"
+            value={formData.experience}
+            onChange={handleFormChange}
+            placeholder="Experiência"
+          />
 
           <Input
             type="text"
@@ -413,7 +413,7 @@ export const CharactersPage = () => {
             onChange={handleFormChange}
             placeholder="URL do Avatar"
           />
-          
+
           <Button onClick={() => handleUpdate(selectedCharacter.id, formData)}>Salvar Alterações</Button>
           <Button onClick={() => setSelectedCharacter(null)}>Cancelar</Button>
         </UpdateForm>
