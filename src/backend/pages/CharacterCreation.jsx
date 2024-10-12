@@ -24,7 +24,7 @@ export const CharacterCreation = () => {
     personalityTraits: '',
     specialAbilities: '',
     avatar: '',  // Novo campo para o avatar
-    hitPoints: 10,  // Pontos de Vida (HP)
+    hitPoints: 10,  // Pontos de Vida (HP) com valor inicial padrão
   });
 
   // Função para atualizar o estado do personagem
@@ -51,13 +51,6 @@ export const CharacterCreation = () => {
     }
   };
 
-  // Função para calcular os Pontos de Vida (HP) com base na classe
-  const calculateHitPoints = (level, constitution) => {
-    const baseHP = 10; // Base HP para todas as classes
-    const constitutionModifier = Math.floor((constitution - 10) / 2);
-    return baseHP + (level - 1) * 5 + constitutionModifier;
-  };
-
   // Função para enviar os dados e salvar o personagem no Firestore
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,14 +61,10 @@ export const CharacterCreation = () => {
       return;
     }
 
-    // Calcular os pontos de vida (HP) antes de salvar
-    const hitPoints = calculateHitPoints(character.level, character.constitution);
-
     try {
       // Criar o documento de personagem dentro da coleção 'characters' do usuário
       await setDoc(doc(db, 'users', currentUser.email, 'characters', character.name), {
         ...character,
-        hitPoints,  // Adicionando os Pontos de Vida calculados
         createdAt: new Date(),
         userId: currentUser.uid,  // Adiciona o ID do usuário para referência
       });
@@ -101,7 +90,7 @@ export const CharacterCreation = () => {
         personalityTraits: '',
         specialAbilities: '',
         avatar: '',  // Limpar a foto ao criar um novo personagem
-        hitPoints: 10,  // Resetar pontos de vida
+        hitPoints: 10,  // Resetar pontos de vida para o valor padrão
       });
     } catch (error) {
       console.error("Erro ao criar personagem:", error);
@@ -126,6 +115,7 @@ export const CharacterCreation = () => {
 
         <Label>Raça:</Label>
         <Select name="race" value={character.race} onChange={handleInputChange}>
+          {/* Opções de Raça */}
           <option value="Humano">Humano</option>
           <option value="Elfo">Elfo</option>
           <option value="Anão">Anão</option>
@@ -149,6 +139,7 @@ export const CharacterCreation = () => {
 
         <Label>Classe:</Label>
         <Select name="class" value={character.class} onChange={handleInputChange}>
+          {/* Opções de Classe */}
           <option value="Guerreiro">Guerreiro</option>
           <option value="Mago">Mago</option>
           <option value="Ladino">Ladino</option>
@@ -180,7 +171,8 @@ export const CharacterCreation = () => {
           type="number"
           name="hitPoints"
           value={character.hitPoints}
-          readOnly
+          onChange={handleInputChange}  // Removido o readOnly para permitir edição
+          min="1"
         />
 
         <Label>Pontos de Experiência:</Label>
