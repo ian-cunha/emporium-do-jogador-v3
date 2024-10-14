@@ -356,7 +356,7 @@ const EditButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   &:hover {
-    background-color: #FF8C00;
+    background-color: #e67e22;
   }
 `;
 
@@ -383,7 +383,7 @@ const AddNoteButton = styled.button`
   bottom: 20px;
   right: 20px;
   &:hover {
-    background-color: #45a049;
+    background-color: #e67e22;
   }
 `;
 
