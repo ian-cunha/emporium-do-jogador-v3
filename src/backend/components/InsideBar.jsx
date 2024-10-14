@@ -83,10 +83,12 @@ export const InsideBar = () => {
 
   // Função para escolher o tipo de dado SVG
   const renderDiceSVG = () => {
+    const diceClass = isRolling ? "dice-rotate" : ""; // Classe para a animação
+
     switch (diceType) {
       case 4:
         return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg width="100" height="100" viewBox="0 0 100 100" className={diceClass} xmlns="http://www.w3.org/2000/svg">
             <g id="dice">
               <circle cx="50" cy="50" r="45" fill="white" stroke="black" strokeWidth="3" />
               <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="30" fill="black">{randomNumber}</text>
@@ -95,7 +97,7 @@ export const InsideBar = () => {
         );
       case 6:
         return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg width="100" height="100" viewBox="0 0 100 100" className={diceClass} xmlns="http://www.w3.org/2000/svg">
             <g id="dice">
               <rect x="10" y="10" width="80" height="80" rx="10" ry="10" fill="white" stroke="black" strokeWidth="3" />
               {randomNumber === 1 && <circle cx="50" cy="50" r="5" fill="black" />}
@@ -147,7 +149,7 @@ export const InsideBar = () => {
       case 12:
       case 20:
         return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg width="100" height="100" viewBox="0 0 100 100" className={diceClass} xmlns="http://www.w3.org/2000/svg">
             <g id="dice">
               <circle cx="50" cy="50" r="45" fill="white" stroke="black" strokeWidth="3" />
               <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="30" fill="black">{randomNumber}</text>
@@ -156,7 +158,7 @@ export const InsideBar = () => {
         );
       case 100:
         return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg width="100" height="100" viewBox="0 0 100 100" className={diceClass} xmlns="http://www.w3.org/2000/svg">
             <g id="dice">
               <rect x="10" y="10" width="80" height="80" fill="white" stroke="black" strokeWidth="3" />
               <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="25" fill="black">{randomNumber}</text>
@@ -179,8 +181,6 @@ export const InsideBar = () => {
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
           <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/plataforma')}> Dashboard</ButtonBar>
-
-          {/* Botão Ficha com Dropdown */}
           <ButtonBar className="bi bi-file-earmark-text" onClick={toggleFichaDropdown}> Ficha</ButtonBar>
           {isFichaDropdownVisible && (
             <div className="ficha-dropdown" ref={fichaDropdownRef}>
@@ -188,7 +188,6 @@ export const InsideBar = () => {
               <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/fichas')}> Suas fichas</ButtonBar>
             </div>
           )}
-
           <ButtonBar className="bi bi-book" onClick={() => navigate('/sessao')}> Sessões</ButtonBar>
           <ButtonBar className="bi bi-collection"> Biblioteca</ButtonBar>
           <ButtonBar className="bi bi-dice-6" onClick={toggleDicePopup}> Dado</ButtonBar>
@@ -203,7 +202,6 @@ export const InsideBar = () => {
         <ButtonBar className="bi bi-people" onClick={() => { window.location = 'https://chat.whatsapp.com/BshOjKKju9rHHj3tZIwKmC' }}> Comunidade</ButtonBar>
       </ListProfile>
 
-      {/* Popup do dado */}
       {isDicePopupVisible && (
         <div className="dice-popup-overlay">
           <div className="dice-popup">
