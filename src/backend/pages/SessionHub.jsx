@@ -21,6 +21,7 @@ const SessionHub = () => {
     const [isEditingUsername, setIsEditingUsername] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false); // Estado para controle de edição
     const [editNoteId, setEditNoteId] = useState(null); // Armazena o ID da nota que está sendo editada
+    const [expandedNotes, setExpandedNotes] = useState({});
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -44,6 +45,10 @@ const SessionHub = () => {
         const querySnapshot = await getDocs(q);
         const fetchedNotes = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setNotes(fetchedNotes);
+    };
+
+    const toggleNoteVisibility = (noteId) => {
+        setExpandedNotes(prev => ({ ...prev, [noteId]: !prev[noteId] }));
     };
 
     const addNote = async () => {
@@ -159,9 +164,16 @@ const SessionHub = () => {
                     {notes.map(note => (
                         <NoteCard key={note.id}>
                             <NoteHeader>ID do Usuário: {note.userId}</NoteHeader>
-                            <NoteContent>{note.text}</NoteContent>
+                            <NoteContent>
+                                {expandedNotes[note.id] ? note.text : `${note.text.slice(0, 500)}...`} {/* Mostra os primeiros 100 caracteres */}
+                                {note.text.length > 100 && (
+                                    <ShowMoreButton onClick={() => toggleNoteVisibility(note.id)}>
+                                        {expandedNotes[note.id] ? "Mostrar menos" : "Mostrar mais"}
+                                    </ShowMoreButton>
+                                )}
+                            </NoteContent>
                             <NoteFooter>Data: {note.createdAt?.toDate().toLocaleString()}</NoteFooter>
-                            {canEditOrDelete(note.userId) && ( // Mostrar botões de editar e apagar apenas para o autor ou nomes antigos
+                            {canEditOrDelete(note.userId) && (
                                 <NoteActions>
                                     <EditButton onClick={() => editNote(note.id, note.text)}>
                                         <FaEdit /> Editar
@@ -206,10 +218,10 @@ const SessionHub = () => {
             >
                 <ModalContent>
                     <ModalTitle>{isEditMode ? "Editar Anotação" : "Adicionar Nova Anotação"}</ModalTitle>
-                    <ModalInput 
-                        type="text" 
-                        value={newNote.text} 
-                        onChange={(e) => setNewNote({ ...newNote, text: e.target.value })} 
+                    <ModalInput
+                        type="text"
+                        value={newNote.text}
+                        onChange={(e) => setNewNote({ ...newNote, text: e.target.value })}
                         placeholder="Escreva sua anotação"
                     />
                     <ButtonGroup>
@@ -241,10 +253,10 @@ const SessionHub = () => {
             >
                 <ModalContent>
                     <ModalTitle>{isEditingUsername ? "Alterar Nome de Usuário" : "Configurar Nome de Usuário"}</ModalTitle>
-                    <ModalInput 
-                        type="text" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
+                    <ModalInput
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         placeholder="Digite seu nome de usuário"
                     />
                     <ButtonGroup>
@@ -256,6 +268,20 @@ const SessionHub = () => {
         </SessionHubContainer>
     );
 };
+
+const ShowMoreButton = styled.button`
+    background: none;
+    border: none;
+    color: #e67e22;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+    padding: 0;
+    font-size: 14px;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
 
 const LoadingContainer = styled.div`
   text-align: center;
