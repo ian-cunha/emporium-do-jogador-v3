@@ -385,7 +385,7 @@ const ModalContent = styled.div`
 
 const ModalTitle = styled.h2`
   margin-bottom: 20px;
-  color: black;
+  color: white;
 `;
 
 const ModalInput = styled.textarea` // Alterado para textarea para permitir mais espaço
