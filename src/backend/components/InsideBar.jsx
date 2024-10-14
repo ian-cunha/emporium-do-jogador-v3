@@ -33,7 +33,7 @@ export const InsideBar = () => {
   useEffect(() => {
     // Adiciona o ouvinte de evento ao clicar fora do dropdown
     document.addEventListener("mousedown", handleClickOutside);
-    
+
     // Remove o ouvinte de evento ao desmontar o componente
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -179,9 +179,9 @@ export const InsideBar = () => {
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
           <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/plataforma')}> Dashboard</ButtonBar>
-          
+
           {/* Botão Ficha com Dropdown */}
-          <ButtonBar className="bi bi-file-earmark-text" onClick={toggleFichaDropdown}>Ficha</ButtonBar>
+          <ButtonBar className="bi bi-file-earmark-text" onClick={toggleFichaDropdown}> Ficha</ButtonBar>
           {isFichaDropdownVisible && (
             <div className="ficha-dropdown" ref={fichaDropdownRef}>
               <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/ficha')}> Criador de Ficha</ButtonBar>
@@ -189,6 +189,7 @@ export const InsideBar = () => {
             </div>
           )}
 
+          <ButtonBar className="bi bi-book" onClick={() => navigate('/sessao')}> Sessões</ButtonBar>
           <ButtonBar className="bi bi-collection"> Biblioteca</ButtonBar>
           <ButtonBar className="bi bi-dice-6" onClick={toggleDicePopup}> Dado</ButtonBar>
           <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referenciaplataforma')}> Referência Rápida</ButtonBar>
