@@ -249,7 +249,7 @@ const SessionHub = () => {
                     />
                     <ButtonGroup>
                         <Button onClick={saveUsername}>{isEditingUsername ? "Salvar Alterações" : "Salvar"}</Button>
-                        <Button onClick={closeModal} style={{ backgroundColor: '#ccc' }}>Cancelar</Button>
+                        <Button onClick={closeModal}>Cancelar</Button>
                     </ButtonGroup>
                 </ModalContent>
             </Modal>
