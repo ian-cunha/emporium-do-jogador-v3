@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ListProfile, ListBar, Menu, NavBar, ButtonBar, BtnProfile, ImageLogo } from "../../components/Globals";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -12,12 +12,33 @@ export const InsideBar = () => {
   const [diceType, setDiceType] = useState(6); // Tipo de dado (6, 20, 100, 4, 8, 10, 12)
   const [isRolling, setIsRolling] = useState(false); // Controle da animação de rotação
   const [randomNumber, setRandomNumber] = useState(1); // Número aleatório exibido durante a animação
+  const [isFichaDropdownVisible, setFichaDropdownVisible] = useState(false); // Controle para o dropdown de fichas
+
+  // Cria uma referência para o dropdown
+  const fichaDropdownRef = useRef(null);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => console.log('Sign Out'))
       .catch((error) => console.log(error));
   };
+
+  // Função para verificar se o clique foi fora do dropdown
+  const handleClickOutside = (event) => {
+    if (fichaDropdownRef.current && !fichaDropdownRef.current.contains(event.target)) {
+      setFichaDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    // Adiciona o ouvinte de evento ao clicar fora do dropdown
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    // Remove o ouvinte de evento ao desmontar o componente
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   function dotBar() {
     var barBtn = document.getElementById('nav');
@@ -39,7 +60,7 @@ export const InsideBar = () => {
 
   // Função para gerar o número aleatório
   const rollDice = () => {
-    setIsRolling(true);  // Começa a animação
+    setIsRolling(true); // Começa a animação
     const interval = setInterval(() => {
       setRandomNumber(Math.floor(Math.random() * diceType) + 1); // Atualiza o número aleatório
     }, 100); // Atualiza o número a cada 100ms
@@ -122,32 +143,8 @@ export const InsideBar = () => {
           </svg>
         );
       case 8:
-        return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g id="dice">
-              <circle cx="50" cy="50" r="45" fill="white" stroke="black" strokeWidth="3" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="30" fill="black">{randomNumber}</text>
-            </g>
-          </svg>
-        );
       case 10:
-        return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g id="dice">
-              <circle cx="50" cy="50" r="45" fill="white" stroke="black" strokeWidth="3" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="30" fill="black">{randomNumber}</text>
-            </g>
-          </svg>
-        );
       case 12:
-        return (
-          <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g id="dice">
-              <circle cx="50" cy="50" r="45" fill="white" stroke="black" strokeWidth="3" />
-              <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="30" fill="black">{randomNumber}</text>
-            </g>
-          </svg>
-        );
       case 20:
         return (
           <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -171,15 +168,27 @@ export const InsideBar = () => {
     }
   };
 
+  const toggleFichaDropdown = () => {
+    setFichaDropdownVisible(!isFichaDropdownVisible); // Abre ou fecha o dropdown
+  };
+
   return (
     <>
       <NavBar>
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
-        <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/plataforma')}> Dashboard</ButtonBar>
-          <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/ficha')}> Criador de ficha</ButtonBar>
-          <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/fichas')}> Fichas</ButtonBar>
+          <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/plataforma')}> Dashboard</ButtonBar>
+          
+          {/* Botão Ficha com Dropdown */}
+          <ButtonBar className="bi bi-file-earmark-text" onClick={toggleFichaDropdown}>Ficha</ButtonBar>
+          {isFichaDropdownVisible && (
+            <div className="ficha-dropdown" ref={fichaDropdownRef}>
+              <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/ficha')}> Criador de Ficha</ButtonBar>
+              <ButtonBar className="bi bi-file-earmark-post" onClick={() => navigate('/fichas')}> Suas fichas</ButtonBar>
+            </div>
+          )}
+
           <ButtonBar className="bi bi-collection"> Biblioteca</ButtonBar>
           <ButtonBar className="bi bi-dice-6" onClick={toggleDicePopup}> Dado</ButtonBar>
           <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referenciaplataforma')}> Referência Rápida</ButtonBar>
@@ -208,20 +217,10 @@ export const InsideBar = () => {
               <option value={20}>d20</option>
               <option value={100}>d100</option>
             </select>
-            <button onClick={rollDice}>Lançar Dado</button>
-            {isRolling ? (
-              <div className="dice-rolling">
-                {/* Mostra o dado girando durante a animação */}
-                <div className="dice-rotate">
-                  {renderDiceSVG()}
-                </div>
-              </div>
-            ) : (
-              <div className="dice-result">
-                {diceResult !== null && <p>Resultado: {diceResult}</p>}
-                {renderDiceSVG()}
-              </div>
-            )}
+            <button onClick={rollDice}>Rolando!</button>
+            <div className="dice-result">
+              {isRolling ? renderDiceSVG() : diceResult !== null && renderDiceSVG()}
+            </div>
           </div>
         </div>
       )}
