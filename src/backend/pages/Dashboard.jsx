@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { ViewPlatform, Title, SubTitle } from '../../components/Globals';
 import { InsideBar } from '../components/InsideBar';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import { getFirestore, collection, getDocs, query, where } from 'firebase/firest
 const db = getFirestore();
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
   const [playerStats, setPlayerStats] = useState(null);
   const [playerPosition, setPlayerPosition] = useState({ x: 5, y: 5 });
   const [missionStarted, setMissionStarted] = useState(false);
@@ -127,10 +129,17 @@ export const Dashboard = () => {
           </AttributeCard>
         </AttributesBox>
 
-        {/* Botão Mapa */}
-        {!missionStarted && !isModalOpen && (
-          <Button primary onClick={startMission}>Mapa</Button>
-        )}
+        <h2>Ferramentas</h2>
+        <p>Em desenvolvimento (Alpha test)</p>
+        <div>
+          {/* Botão Mapa */}
+          {!missionStarted && !isModalOpen && (
+            <Button primary onClick={startMission}>Mapa</Button>
+          )}
+
+          {/* Botão Sessões */}
+          <Button onClick={() => navigate('/sessao')}>Sessões</Button>
+        </div>
 
         {/* Modal de Mapa */}
         {isModalOpen && (

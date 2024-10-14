@@ -13,6 +13,7 @@ import CharacterCreation from "./backend/pages/CharacterCreation";
 import { QuickRefInside } from "./backend/pages/QuickRefInside";
 import Settings from "./backend/pages/Settings";
 import CharactersPage from "./backend/pages/CharactersPage";
+import SessionManager from "./backend/pages/SessionManager";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,6 +71,11 @@ function App() {
         <Route path="/fichas" element={
           <ProtectedRoute user={user}>
             <CharactersPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/sessao" element={
+          <ProtectedRoute user={user}>
+            <SessionManager />
           </ProtectedRoute>
         } />
       </Routes>
