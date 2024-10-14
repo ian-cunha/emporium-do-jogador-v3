@@ -346,9 +346,9 @@ const DeleteButton = styled.button`
 `;
 
 const AddNoteButton = styled.button`
-  background-color: #4CAF50;
+  background-color: white;
   border: none;
-  color: white;
+  color: black;
   padding: 15px;
   border-radius: 50%;
   cursor: pointer;
