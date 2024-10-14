@@ -9,7 +9,7 @@ const db = getFirestore();
 export const SessionManager = () => {
   const [sessionName, setSessionName] = useState('');
   const [sessions, setSessions] = useState([]);
-  const [currentUser, setCurrentUser] = useState(auth.currentUser);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -39,7 +39,8 @@ export const SessionManager = () => {
           name: sessionName,
           creatorId: currentUser.uid,
           players: [currentUser.uid],
-          createdAt: new Date()
+          createdAt: new Date(),
+          visibility: 'private' // Default to private
         });
         console.log("Session created with ID: ", docRef.id);
         fetchSessions();
@@ -60,13 +61,11 @@ export const SessionManager = () => {
           const currentUserSessions = sessions.filter(session => session.players.includes(currentUser.uid));
 
           if (currentUserSessions.length > 0 && currentUserSessions[0].id !== sessionId) {
-            // User is in another session, remove them from that session
             const previousSessionRef = doc(db, "sessions", currentUserSessions[0].id);
             const previousSessionDoc = await getDoc(previousSessionRef);
             if (previousSessionDoc.exists()) {
               const previousSessionData = previousSessionDoc.data();
               if (previousSessionData.creatorId === currentUser.uid) {
-                // If the user was the creator of the session, delete it
                 await deleteDoc(previousSessionRef);
               } else {
                 await updateDoc(previousSessionRef, {
@@ -82,11 +81,15 @@ export const SessionManager = () => {
             return;
           }
 
-          await updateDoc(sessionRef, {
-            players: [...sessionData.players, currentUser.uid]
-          });
-          console.log("User joined the session successfully.");
-          fetchSessions();
+          if (!sessionData.visibility || sessionData.visibility === 'public' || sessionData.creatorId === currentUser.uid) {
+            await updateDoc(sessionRef, {
+              players: [...sessionData.players, currentUser.uid]
+            });
+            console.log("User joined the session successfully.");
+            fetchSessions();
+          } else {
+            console.log("Cannot join private session.");
+          }
         } else {
           console.log("No such document!");
         }
@@ -105,11 +108,9 @@ export const SessionManager = () => {
           const sessionData = sessionDoc.data();
           
           if (sessionData.creatorId === currentUser.uid) {
-            // If the current user is the session creator, delete the session
             await deleteDoc(sessionRef);
             console.log("Session deleted as the creator left.");
           } else {
-            // Remove the user from the session but don't delete the session
             await updateDoc(sessionRef, {
               players: sessionData.players.filter(playerId => playerId !== currentUser.uid)
             });
@@ -123,6 +124,29 @@ export const SessionManager = () => {
       } catch (error) {
         console.error("Error leaving session: ", error);
       }
+    }
+  };
+
+  const toggleSessionVisibility = async (sessionId) => {
+    try {
+      const sessionRef = doc(db, "sessions", sessionId);
+      const sessionDoc = await getDoc(sessionRef);
+      if (sessionDoc.exists()) {
+        const sessionData = sessionDoc.data();
+        if (sessionData.creatorId === currentUser.uid) {
+          await updateDoc(sessionRef, {
+            visibility: sessionData.visibility === 'private' ? 'public' : 'private'
+          });
+          console.log(`Session visibility changed to ${sessionData.visibility === 'private' ? 'public' : 'private'}.`);
+          fetchSessions();
+        } else {
+          console.log("You are not the creator of this session.");
+        }
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error updating session visibility: ", error);
     }
   };
 
@@ -151,13 +175,18 @@ export const SessionManager = () => {
         <SessionList>
           {sessions.map(session => (
             <SessionItem key={session.id}>
-              <SessionName>{session.name}</SessionName>
+              <SessionName>{session.name} ({session.visibility})</SessionName>
               <ButtonContainer>
                 <JoinButton 
                   onClick={() => joinSession(session.id)} 
                   disabled={isUserInSession(session.id)}>
                   {isUserInSession(session.id) ? 'Logado' : 'Entrar'}
                 </JoinButton>
+                {session.creatorId === currentUser?.uid && (
+                  <VisibilityButton onClick={() => toggleSessionVisibility(session.id)}>
+                    {session.visibility === 'private' ? 'Tornar Pública' : 'Tornar Privada'}
+                  </VisibilityButton>
+                )}
                 {session.creatorId === currentUser?.uid ? (
                   <CloseButton onClick={() => leaveSession(session.id)}>Sair (Apagar Sessão)</CloseButton>
                 ) : (
@@ -267,6 +296,13 @@ const SessionName = styled.span`
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
+`;
+
+const VisibilityButton = styled(Button)`
+  background-color: #28a745;
+  &:hover {
+    background-color: #218838;
+  }
 `;
 
 export default SessionManager;
