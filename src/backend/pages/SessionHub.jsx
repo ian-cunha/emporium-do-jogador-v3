@@ -286,7 +286,7 @@ const NoteContainer = styled.div`
 
 const NoteGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   gap: 15px;
 `;
 
@@ -296,9 +296,6 @@ const NoteCard = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 const NoteHeader = styled.h4`
@@ -308,7 +305,8 @@ const NoteHeader = styled.h4`
 
 const NoteContent = styled.p`
   margin: 10px 0;
-  color: #333;
+  text-align: justify;
+  color: white;
 `;
 
 const NoteFooter = styled.small`
@@ -388,13 +386,16 @@ const ModalTitle = styled.h2`
   color: #333;
 `;
 
-const ModalInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+const ModalInput = styled.textarea` // Alterado para textarea para permitir mais espaço
+    width: 100%;
+    max-width: 100%; // Limita a largura máxima
+    min-height: 50vh; // Altura mínima para a entrada
+    resize: vertical;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 `;
 
 const ButtonGroup = styled.div`
