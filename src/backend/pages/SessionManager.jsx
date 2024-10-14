@@ -40,7 +40,7 @@ export const SessionManager = () => {
           creatorId: currentUser.uid,
           players: [currentUser.uid],
           createdAt: new Date(),
-          visibility: 'private' // Default to private
+          visibility: 'privado' // Default to private
         });
         console.log("Session created with ID: ", docRef.id);
         fetchSessions();
@@ -64,7 +64,7 @@ export const SessionManager = () => {
             return;
           }
 
-          if (!sessionData.visibility || sessionData.visibility === 'public' || sessionData.creatorId === currentUser.uid) {
+          if (!sessionData.visibility || sessionData.visibility === 'público' || sessionData.creatorId === currentUser.uid) {
             await updateDoc(sessionRef, {
               players: [...sessionData.players, currentUser.uid]
             });
@@ -146,9 +146,9 @@ export const SessionManager = () => {
         const sessionData = sessionDoc.data();
         if (sessionData.creatorId === currentUser.uid) {
           await updateDoc(sessionRef, {
-            visibility: sessionData.visibility === 'private' ? 'public' : 'private'
+            visibility: sessionData.visibility === 'privado' ? 'público' : 'privado'
           });
-          console.log(`Session visibility changed to ${sessionData.visibility === 'private' ? 'public' : 'private'}.`);
+          console.log(`Session visibility changed to ${sessionData.visibility === 'privado' ? 'público' : 'privado'}.`);
           fetchSessions();
         } else {
           console.log("You are not the creator of this session.");
@@ -191,11 +191,11 @@ export const SessionManager = () => {
                 <JoinButton 
                   onClick={() => joinSession(session.id)} 
                   disabled={isUserInSession(session.id)}>
-                  {isUserInSession(session.id) ? 'Logado' : 'Entrar'}
+                  {isUserInSession(session.id) ? 'Conectado' : 'Entrar'}
                 </JoinButton>
                 {session.creatorId === currentUser?.uid && (
                   <VisibilityButton onClick={() => toggleSessionVisibility(session.id)}>
-                    {session.visibility === 'private' ? 'Tornar Pública' : 'Tornar Privada'}
+                    {session.visibility === 'privado' ? 'Tornar Público' : 'Tornar Privado'}
                   </VisibilityButton>
                 )}
                 {session.creatorId === currentUser?.uid ? (
