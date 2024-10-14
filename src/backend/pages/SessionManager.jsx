@@ -58,23 +58,6 @@ export const SessionManager = () => {
         const sessionDoc = await getDoc(sessionRef);
         if (sessionDoc.exists()) {
           const sessionData = sessionDoc.data();
-          const currentUserSessions = sessions.filter(session => session.players.includes(currentUser.uid));
-
-          if (currentUserSessions.length > 0 && currentUserSessions[0].id !== sessionId) {
-            const previousSessionRef = doc(db, "sessions", currentUserSessions[0].id);
-            const previousSessionDoc = await getDoc(previousSessionRef);
-            if (previousSessionDoc.exists()) {
-              const previousSessionData = previousSessionDoc.data();
-              if (previousSessionData.creatorId === currentUser.uid) {
-                await deleteDoc(previousSessionRef);
-              } else {
-                await updateDoc(previousSessionRef, {
-                  players: previousSessionData.players.filter(playerId => playerId !== currentUser.uid)
-                });
-              }
-              console.log("User removed from previous session.");
-            }
-          }
 
           if (sessionData.players.includes(currentUser.uid)) {
             console.log("User is already in this session.");
@@ -86,6 +69,28 @@ export const SessionManager = () => {
               players: [...sessionData.players, currentUser.uid]
             });
             console.log("User joined the session successfully.");
+
+            // Atualizar a sessão anterior, se houver
+            const currentUserSessions = sessions.filter(session => session.players.includes(currentUser.uid));
+            const previousSession = currentUserSessions.find(session => session.id !== sessionId);
+
+            if (previousSession) {
+              const previousSessionRef = doc(db, "sessions", previousSession.id);
+              const previousSessionDoc = await getDoc(previousSessionRef);
+              if (previousSessionDoc.exists()) {
+                const previousSessionData = previousSessionDoc.data();
+                
+                if (previousSessionData.creatorId === currentUser.uid) {
+                  console.log("You are the creator of the previous session, it will not be deleted automatically.");
+                } else {
+                  await updateDoc(previousSessionRef, {
+                    players: previousSessionData.players.filter(playerId => playerId !== currentUser.uid)
+                  });
+                  console.log("User removed from previous session.");
+                }
+              }
+            }
+
             fetchSessions();
           } else {
             console.log("Cannot join private session.");
@@ -107,9 +112,15 @@ export const SessionManager = () => {
         if (sessionDoc.exists()) {
           const sessionData = sessionDoc.data();
           
+          // Verifica se o usuário é o criador da sessão
           if (sessionData.creatorId === currentUser.uid) {
-            await deleteDoc(sessionRef);
-            console.log("Session deleted as the creator left.");
+            const confirmLeave = window.confirm("Tem certeza que deseja apagar sua sessão?");
+            if (confirmLeave) {
+              await deleteDoc(sessionRef);
+              console.log("Session deleted as the creator left.");
+            } else {
+              return; // Cancela a ação de sair se o usuário não confirmar
+            }
           } else {
             await updateDoc(sessionRef, {
               players: sessionData.players.filter(playerId => playerId !== currentUser.uid)
@@ -188,7 +199,7 @@ export const SessionManager = () => {
                   </VisibilityButton>
                 )}
                 {session.creatorId === currentUser?.uid ? (
-                  <CloseButton onClick={() => leaveSession(session.id)}>Sair (Apagar Sessão)</CloseButton>
+                  <CloseButton onClick={() => leaveSession(session.id)}>Apagar Sessão</CloseButton>
                 ) : (
                   isUserInSession(session.id) && (
                     <LeaveButton onClick={() => leaveSession(session.id)}>Sair</LeaveButton>
