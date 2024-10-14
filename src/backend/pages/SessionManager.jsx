@@ -14,7 +14,13 @@ export const SessionManager = () => {
   const navigate = useNavigate();
 
   const handleSessionClick = (sessionId) => {
-    navigate(`/sessao/${sessionId}`);
+    const session = sessions.find(session => session.id === sessionId);
+
+    if (session && (session.visibility === 'público' || session.creatorId === currentUser?.uid)) {
+      navigate(`/sessao/${sessionId}`);
+    } else {
+      alert("Esta sessão é privada e você não tem permissão para acessá-la.");
+    }
   };
 
   useEffect(() => {
@@ -70,6 +76,11 @@ export const SessionManager = () => {
             return;
           }
 
+          if (sessionData.visibility === 'privado' && sessionData.creatorId !== currentUser.uid) {
+            alert("Esta sessão é privada e apenas o criador pode entrar.");
+            return;
+          }
+
           if (!sessionData.visibility || sessionData.visibility === 'público' || sessionData.creatorId === currentUser.uid) {
             await updateDoc(sessionRef, {
               players: [...sessionData.players, currentUser.uid]
@@ -97,8 +108,6 @@ export const SessionManager = () => {
             }
 
             fetchSessions();
-          } else {
-            console.log("Cannot join private session.");
           }
         } else {
           console.log("No such document!");
@@ -200,11 +209,11 @@ export const SessionManager = () => {
                     e.stopPropagation();
                     joinSession(session.id);
                   }}
-                  disabled={isUserInSession(session.id)}>
-                  {isUserInSession(session.id) ? 'Conectado' : 'Entrar'}
+                  disabled={isUserInSession(session.id) || (session.visibility === 'privado' && session.creatorId !== currentUser?.uid)}>
+                  {isUserInSession(session.id) ? 'Conectado' : session.visibility === 'privado' && session.creatorId !== currentUser?.uid ? 'Privado' : 'Entrar'}
                 </JoinButton>
                 {session.creatorId === currentUser?.uid && (
-                  <VisibilityButton 
+                  <VisibilityButton
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleSessionVisibility(session.id);
@@ -213,7 +222,7 @@ export const SessionManager = () => {
                   </VisibilityButton>
                 )}
                 {session.creatorId === currentUser?.uid ? (
-                  <CloseButton 
+                  <CloseButton
                     onClick={(e) => {
                       e.stopPropagation();
                       leaveSession(session.id);
@@ -222,7 +231,7 @@ export const SessionManager = () => {
                   </CloseButton>
                 ) : (
                   isUserInSession(session.id) && (
-                    <LeaveButton 
+                    <LeaveButton
                       onClick={(e) => {
                         e.stopPropagation();
                         leaveSession(session.id);
