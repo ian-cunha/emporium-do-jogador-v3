@@ -199,6 +199,7 @@ const SessionHub = () => {
                         padding: '40px',
                         width: '400px',
                         borderRadius: '10px',
+                        backgroundColor: 'black',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                     },
                 }}
@@ -213,7 +214,7 @@ const SessionHub = () => {
                     />
                     <ButtonGroup>
                         <Button onClick={addNote}>{isEditMode ? "Salvar Alterações" : "Salvar"}</Button>
-                        <Button onClick={closeNoteModal} style={{ backgroundColor: '#ccc' }}>Cancelar</Button>
+                        <Button onClick={closeNoteModal}>Cancelar</Button>
                     </ButtonGroup>
                 </ModalContent>
             </Modal>
@@ -367,8 +368,8 @@ const Footer = styled.div`
 
 const Button = styled.button`
   padding: 10px 20px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -383,7 +384,7 @@ const ModalContent = styled.div`
 
 const ModalTitle = styled.h2`
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 `;
 
 const ModalInput = styled.textarea` // Alterado para textarea para permitir mais espaço
@@ -391,6 +392,8 @@ const ModalInput = styled.textarea` // Alterado para textarea para permitir mais
     max-width: 100%; // Limita a largura máxima
     min-height: 50vh; // Altura mínima para a entrada
     resize: vertical;
+    background-color: black;
+    color: white;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
