@@ -234,6 +234,7 @@ const SessionHub = () => {
                         padding: '40px',
                         width: '400px',
                         borderRadius: '10px',
+                        backgroundColor: 'black',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                     },
                 }}
@@ -384,7 +385,7 @@ const ModalContent = styled.div`
 
 const ModalTitle = styled.h2`
   margin-bottom: 20px;
-  color: white;
+  color: black;
 `;
 
 const ModalInput = styled.textarea` // Alterado para textarea para permitir mais espaço
