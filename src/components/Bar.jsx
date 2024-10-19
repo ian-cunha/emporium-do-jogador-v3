@@ -30,8 +30,8 @@ export const Bar = () => {
         <Menu className="bi bi-list" onClick={dotBar}></Menu>
         <ImageLogo onClick={() => navigate('/')} src={logo} />
         <ListBar id="nav">
-          <DropBox>Raças</DropBox>
-          <DropBox>Classes</DropBox>
+          <DropBox onClick={() => navigate('/racas')}>Raças</DropBox>
+          <DropBox onClick={() => navigate('/classes')}>Classes</DropBox>
           <DropBox onClick={() => navigate('/magias')}>Mágias</DropBox>
           <ButtonBar className="bi bi-list-nested" onClick={() => navigate('/referencias')}> Referência Rápida</ButtonBar>
         </ListBar>

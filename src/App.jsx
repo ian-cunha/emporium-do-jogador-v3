@@ -15,6 +15,8 @@ import Settings from "./backend/pages/Settings";
 import CharactersPage from "./backend/pages/CharactersPage";
 import SessionManager from "./backend/pages/SessionManager";
 import SessionHub from "./backend/pages/SessionHub";
+import { Races } from "./pages/library/races";
+import { Classes } from "./pages/library/classes";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -43,63 +45,65 @@ function App() {
         <Route path="*" element={<div>Oxi, acho que tu se perdesse visse!</div>} />
         <Route index element={<Home />} />
         <Route path=":id" element={<Magic />} />
+        <Route path="racas" element={<Races />} />
+        <Route path="classes" element={<Classes />} />
         <Route path="referencias" element={<QuickRef />} />
         <Route path="login" element={<LoginRegister user={user} />} />
-        <Route 
-          path="plataforma" 
+        <Route
+          path="plataforma"
           element={
             <ProtectedRoute user={user}>
               <Dashboard />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="ficha" 
+        <Route
+          path="ficha"
           element={
             <ProtectedRoute user={user}>
               <CharacterCreation />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="referenciaplataforma" 
+        <Route
+          path="referenciaplataforma"
           element={
             <ProtectedRoute user={user}>
               <QuickRefInside />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="configuracoes" 
+        <Route
+          path="configuracoes"
           element={
             <ProtectedRoute user={user}>
               <Settings />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="fichas" 
+        <Route
+          path="fichas"
           element={
             <ProtectedRoute user={user}>
               <CharactersPage />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="sessao" 
+        <Route
+          path="sessao"
           element={
             <ProtectedRoute user={user}>
               <SessionManager />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="sessao/:id" 
+        <Route
+          path="sessao/:id"
           element={
             <ProtectedRoute user={user}>
               <SessionHub />
             </ProtectedRoute>
-          } 
+          }
         />
       </Routes>
     </BrowserRouter>
